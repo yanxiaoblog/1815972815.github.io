@@ -6,23 +6,41 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://1815972815.github.io">
-  <title>我的第一篇博客文章 | Hexo</title>
+  <title>springmvc | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我的第一篇博客文章–Markdown的编写规则作者 言笑这是一篇关于markdown文档编写规则的文章">
+  <meta name="description" content="spring_MVC原理解析笔记记录作者 言笑spring_mvc就是将原本的servlet程序使用实现Controller类（handler）来代替，其本质上也是一个servlet程序，但是比servlet程序更加简洁。spring-mvc是在handler和jsp页面中间插入一个调度者，用户发起的请求都经过这个调度者来调度，找到对应的handler，并执行对应的handler，最后跳转到jsp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇博客文章">
-<meta property="og:url" content="http://1815972815.github.io/2021/09/06/myblog/index.html">
+<meta property="og:title" content="springmvc">
+<meta property="og:url" content="http://1815972815.github.io/2021/09/11/springmvc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="我的第一篇博客文章–Markdown的编写规则作者 言笑这是一篇关于markdown文档编写规则的文章">
+<meta property="og:description" content="spring_MVC原理解析笔记记录作者 言笑spring_mvc就是将原本的servlet程序使用实现Controller类（handler）来代替，其本质上也是一个servlet程序，但是比servlet程序更加简洁。spring-mvc是在handler和jsp页面中间插入一个调度者，用户发起的请求都经过这个调度者来调度，找到对应的handler，并执行对应的handler，最后跳转到jsp">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://1815972815.github.io/2021/09/06/myblog/girl.jpg">
-<meta property="og:image" content="http://1815972815.github.io/2021/09/06/myblog/tx.jpg">
-<meta property="article:published_time" content="2021-09-06T13:47:28.000Z">
-<meta property="article:modified_time" content="2021-09-11T07:54:31.188Z">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/1-1.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/1-2.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/2-1.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/2-2.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/3-2.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-1.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-2.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-3.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-4.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-5.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-6.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/4-7.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/6-1.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/6-2.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/6-3.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/6-4.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/6-5.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/6-6.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/2-4-1.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/11/springmvc/2-5-1.jpg">
+<meta property="article:published_time" content="2021-09-11T01:57:12.000Z">
+<meta property="article:modified_time" content="2021-09-11T08:01:38.721Z">
 <meta property="article:author" content="YanXiao">
-<meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://1815972815.github.io/2021/09/06/myblog/girl.jpg">
+<meta name="twitter:image" content="http://1815972815.github.io/2021/09/11/springmvc/1-1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -170,14 +188,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-myblog" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-springmvc" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      我的第一篇博客文章
+      springmvc
     </h1>
   
 
@@ -192,98 +210,99 @@
   </a>
   
         
-        <a href="/2021/09/06/myblog/" class="archive-article-date">
-  	<time datetime="2021-09-06T13:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
+        <a href="/2021/09/11/springmvc/" class="archive-article-date">
+  	<time datetime="2021-09-11T01:57:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="我的第一篇博客文章–Markdown的编写规则"><a href="#我的第一篇博客文章–Markdown的编写规则" class="headerlink" title="我的第一篇博客文章–Markdown的编写规则"></a>我的第一篇博客文章–Markdown的编写规则</h1><h2 id="作者-言笑"><a href="#作者-言笑" class="headerlink" title="作者 言笑"></a>作者 言笑</h2><p>这是一篇关于markdown文档编写规则的文章</p>
+        <h1 id="spring-MVC原理解析笔记记录"><a href="#spring-MVC原理解析笔记记录" class="headerlink" title="spring_MVC原理解析笔记记录"></a>spring_MVC原理解析笔记记录</h1><h2 id="作者-言笑"><a href="#作者-言笑" class="headerlink" title="作者 言笑"></a>作者 言笑</h2><p>spring_mvc就是将原本的servlet程序使用实现Controller类（handler）来代替，<br>其本质上也是一个servlet程序，但是比servlet程序更加简洁。spring-mvc是在<br>handler和jsp页面中间插入一个调度者，用户发起的请求都经过这个调度者来调度，<br>找到对应的handler，并执行对应的handler，最后跳转到jsp页面。</p>
+<hr>
 <span id="more"></span>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>使用#号开头<br>一级标题一个#<br>二级标题两个##<br>以此类推，最多六级标题<br>注：#号和标题文字之间要隔一个空格</p>
-<h3 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h3><p>Markdown划分段落非常简单，就是在段落前后保留一个空行即可</p>
-<p>第一段文章内容</p>
-<p>第二段文章内容</p>
-<h3 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h3><blockquote>
-<p>这是区块引用：如果我们需要对一段内容进行强调显示时，Markdown提供了一个特殊&gt;<br>符号&gt;(&gt;和内容之前需要空一个空格)用于段落区块引用</p>
-</blockquote>
-<blockquote>
-<p>Markdown支持同时强调引用多个段落</p>
-</blockquote>
-<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3><p>超链接的格式为：<br>    <code>[链接名](链接)</code></p>
-<p><a target="_blank" rel="noopener" href="https://www.baidu.com/?tn=40020637_14_oem_dg">百度搜索</a></p>
-<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>显示网页图片,格式为：<br>    <code>![图片说明](网页图片地址)</code></p>
-<p><img src="/2021/09/06/myblog/girl.jpg" alt="帅男孩"></p>
-<p>显示本地图片</p>
-<p>使用相对路径插入图片。比如你把一个img01.png的图片和markdownPad2笔记放在一起，<br>那么你就可以用这种方式插入图片，格式为：<br><code>![图片说明](相对地址)</code></p>
-<p><img src="/2021/09/06/myblog/tx.jpg" alt="boy"></p>
-<p>或者使用插件上传图片，格式为：<br>这种方式要安装插件和设置配置文件信息</p>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>无序列表使用<em>、+、-标识，但是一般使用</em>来标识无序列表</p>
-<p>单级列表从最左开始(适用于无序列表)，格式为：<code>* 无序列表</code></p>
-<ul>
-<li>无序列表</li>
-<li>无序列表</li>
-<li>无序列表</li>
-</ul>
-<p>Markdown支持多级列表嵌套，但是建议一般不使用超过两级列表，另外建议两级<br>列表从缩进3个空格开始(适用于无序列表)</p>
-<ul>
-<li>无序列表<ul>
-<li>无序列表</li>
-<li>无序列表</li>
-</ul>
-</li>
-<li>无序列表</li>
-</ul>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表使用数字.标识,如:<code>1. 有序列表</code></p>
+
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>创建一个maven project，并给项目起名字为springMVC，如下图：</li>
+</ol>
+<p><img src="/2021/09/11/springmvc/1-1.jpg"></p>
+<p><img src="/2021/09/11/springmvc/1-2.jpg"></p>
+<ol start="2">
+<li>创建一个maven Module，并给项目起名为springmvc-01，如下图：</li>
+</ol>
+<p><img src="/2021/09/11/springmvc/2-1.jpg"></p>
+<p><img src="/2021/09/11/springmvc/2-2.jpg"></p>
+<ol start="3">
+<li>添加一个web支持，如下图：</li>
+</ol>
+<p>![](springmvc/3-1.jpg</p>
+<p><img src="/2021/09/11/springmvc/3-2.jpg"></p>
+<ol start="4">
+<li>添加Tomcat服务器，如下图：</li>
+</ol>
+<p><img src="/2021/09/11/springmvc/4-1.jpg"></p>
+<p><img src="/2021/09/11/springmvc/4-2.jpg"></p>
+<p><img src="/2021/09/11/springmvc/4-3.jpg"></p>
+<p><img src="/2021/09/11/springmvc/4-4.jpg"></p>
+<p><img src="/2021/09/11/springmvc/4-5.jpg"></p>
+<p><img src="/2021/09/11/springmvc/4-6.jpg"></p>
+<p><img src="/2021/09/11/springmvc/4-7.jpg"></p>
+<ol start="5">
+<li>在project的pom.xml文件下添加相应的依赖，代码如下：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--导入依赖--&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;5.1.9.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jstl&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>在project structure中为Tomcat服务器添加lib目录，然后在lib目录下添加<br>依赖，如下图：</li>
+</ol>
+<p><img src="/2021/09/11/springmvc/6-1.jpg"></p>
+<p><img src="/2021/09/11/springmvc/6-2.jpg"></p>
+<p><img src="/2021/09/11/springmvc/6-3.jpg"></p>
+<p><img src="/2021/09/11/springmvc/6-4.jpg"></p>
+<p><img src="/2021/09/11/springmvc/6-5.jpg"></p>
+<p><img src="/2021/09/11/springmvc/6-6.jpg"></p>
+<h3 id="springMVC原理图片说明"><a href="#springMVC原理图片说明" class="headerlink" title="springMVC原理图片说明"></a>springMVC原理图片说明</h3><p>如图所示：中心是dispatcherServlet，围绕在dispatcherServlet中有三个循环，1到3是<br>一个循环，4到8是一个循环，9到10是一个循环，最后是11将数据输出到jsp页面</p>
+<p><img src="/2021/09/11/springmvc/%E5%8E%9F%E7%90%86%E5%9B%BE.jpg"></p>
 <ol>
-<li>有序列表</li>
-<li>有序列表</li>
-<li>有序列表</li>
+<li>循环一：客户端发送请求到dispatcherServlet中，dispatcherServlet接收到请求，<br>并用请求的地址栏的地址通过循环一来获取到实现了Controller接口的类对象（以下称为<br>handler），最后dispatcherServlet对handler对象进性解析。</li>
+<li>循环二：通过解析handler的数据来执行handler对象（即执行实现Controller接口时<br>实现的handlerRequest方法），最后将视图名和保存在ModelAndView中的数据返回给<br>dispatcherServlet。</li>
+<li>循环三：dispatcherServlet将视图名传给视图解析器进行视图路径的拼接，视图解析器<br>最后将视图的完整路径返回给dispatcherServlet。</li>
+<li>dispatcherServlet根据完整的视图路径跳转到相应的jsp页面</li>
 </ol>
-<p>有序列表的多列表嵌套：</p>
-<ol>
-<li>有序列表<ol>
-<li>有序列表</li>
-<li>有序列表</li>
+<h3 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h3><ol>
+<li>配置springmvc01下的web/WEB-INF/web.xml文件</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--配置dispatcherServlet--&gt;</span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;springMVC&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">        &lt;!--关联配置文件springMVC-servlet--&gt;</span><br><span class="line">        &lt;init-param&gt;</span><br><span class="line">            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;classpath:springmvc-servlet.xml&lt;/param-value&gt;</span><br><span class="line">        &lt;/init-param&gt;</span><br><span class="line">        &lt;!--将启动级别设为1，即和服务器一起启动--&gt;</span><br><span class="line">        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">        /:表示匹配所有的请求，但不包括.jsp请求</span><br><span class="line">        /*:表示匹配所有的请求，包括.jsp请求</span><br><span class="line">        这里使用/,因为如果使用/*的话，在找对应的handler时就会找不到，出现404页面</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;springMVC&lt;/servlet-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在springmvc01下的src/main/resources下创建springmvc-servlet.xml文件</p>
 </li>
-<li>有序列表</li>
+<li><p>配置springmvc-servlet.xml文件</p>
+</li>
 </ol>
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>分割线格式为：<code>***</code>或<code>---</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line">    &lt;!--创建中央处理器--&gt;</span><br><span class="line">    &lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot; id=&quot;beanNameUrlHandlerMapping&quot;/&gt;</span><br><span class="line">    &lt;!--创建处理器适配器--&gt;</span><br><span class="line">    &lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot; id=&quot;simpleControllerHandlerAdapter&quot;/&gt;</span><br><span class="line">    &lt;!--视图解析器:DispatcherServlet给他的ModelAndView</span><br><span class="line">        1、获取ModelAndView的数据</span><br><span class="line">        2、解析ModelAndView中的视图名字</span><br><span class="line">        3、拼接视图，/WEB-INF/jsp/hello.jsp，然后根据拼好的视图路径找到对应的视图</span><br><span class="line">        4、在hello.jsp中显示ModelAndView中保存的视图</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    &lt;!--注：这个是通过映射处理器获取对应的url地址的，所以id的值中/不能少--&gt;</span><br><span class="line">    &lt;bean id=&quot;/helloController&quot; class=&quot;com.tSmile.controller.HelloController&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在src/main/java下创建包com.tSmile.controller包，在包下创建handler类</li>
+</ol>
+<p><img src="/2021/09/11/springmvc/2-4-1.jpg"></p>
+<p>并实现Controller接口和相应的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package com.tSmile.Controller;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import org.springframework.web.servlet.ModelAndView;</span><br><span class="line">import org.springframework.web.servlet.mvc.Controller;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @date 2021/9/11 - 11:41</span><br><span class="line"> */</span><br><span class="line">public class HelloController implements Controller &#123;</span><br><span class="line">    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception &#123;</span><br><span class="line">        //创建视图模型对象</span><br><span class="line">        ModelAndView modelAndView = new ModelAndView();</span><br><span class="line">        //调用service层方法</span><br><span class="line">        String value = &quot;I am a super man&quot;;</span><br><span class="line">        //将返回值存到视图模型中</span><br><span class="line">        modelAndView.addObject(&quot;msg&quot;,value);</span><br><span class="line">        //跳转到页面</span><br><span class="line">        modelAndView.setViewName(&quot;hello&quot;);</span><br><span class="line">        return modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在web/WEB-INF下创建jsp目录，在jsp目录下创建hello.jsp文件</li>
+</ol>
+<p><img src="/2021/09/11/springmvc/2-5-1.jpg"></p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Hello&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">$&#123;msg&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>启动Tomcat服务器，在浏览器地址栏上输入地址：<br><code>http://localhost:8080/springmvcTest/helloController</code></li>
+</ol>
 <hr>
+<p>注：代码结合上面的原理图来理解</p>
 <hr>
-<h3 id="行内代码"><a href="#行内代码" class="headerlink" title="行内代码"></a>行内代码</h3><p>缩进一次再开始写代码，注意文字和代码间要空一行,一般代码片段用左边和右边两个<br>反引号，中间为代码片段</p>
-<pre><code>var x = 10
-</code></pre>
-<h3 id="多行代码"><a href="#多行代码" class="headerlink" title="多行代码"></a>多行代码</h3><p>缩进一次再开始写代码，注意文字和代码间要空一行，一般使用三个反引号左右把代码<br>引用起来</p>
-<pre><code>pyblic static void mian(String[] args)&#123;
-    System.out.println(&quot;多行代码&quot;)
-&#125;
-</code></pre>
-<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>表格的格式为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|  表头   | 表头  | 表头  |</span><br><span class="line">| :----- | -----: | :-----: |</span><br><span class="line">| 左对齐  | 右对齐 | 中间对齐 |</span><br><span class="line">| 单元格  | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th align="left">表头</th>
-<th align="right">表头</th>
-<th align="center">表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">左对齐</td>
-<td align="right">右对齐</td>
-<td align="center">中间对齐</td>
-</tr>
-<tr>
-<td align="left">单元格</td>
-<td align="right">单元格</td>
-<td align="center">单元格</td>
-</tr>
-</tbody></table>
-<h3 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h3><p>在需要置顶的文章的Front-matter中加上top选项即可top后面的数字越大，优先级越高<br>即加在在date下就可以了</p>
+<p>本文章是观看了狂神说的springMVC视频写的笔记，侵权删</p>
 
       
 
@@ -297,7 +316,7 @@
           
           <br>
           <strong>本文链接：</strong>
-          <a rel="license" href="http://1815972815.github.io/2021/09/06/myblog/">http://1815972815.github.io/2021/09/06/myblog/</a>
+          <a rel="license" href="http://1815972815.github.io/2021/09/11/springmvc/">http://1815972815.github.io/2021/09/11/springmvc/</a>
           <br>
           <strong>版权声明：</strong>
           本作品采用
@@ -348,17 +367,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -409,7 +417,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/09/06/myblog/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/09/11/springmvc/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -424,18 +432,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/09/11/springmvc/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          springmvc
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/09/06/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2021/09/06/myblog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的第一篇博客文章</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -462,7 +461,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E2%80%93Markdown%E7%9A%84%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">我的第一篇博客文章–Markdown的编写规则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E8%80%85-%E8%A8%80%E7%AC%91"><span class="toc-number">1.1.</span> <span class="toc-text">作者 言笑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E9%A2%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E8%90%BD"><span class="toc-number">1.1.2.</span> <span class="toc-text">段落</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E5%BC%95%E7%94%A8"><span class="toc-number">1.1.3.</span> <span class="toc-text">区块引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.4.</span> <span class="toc-text">超链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87"><span class="toc-number">1.1.5.</span> <span class="toc-text">图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">1.1.6.</span> <span class="toc-text">无序列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="toc-number">1.1.7.</span> <span class="toc-text">有序列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%89%B2%E7%BA%BF"><span class="toc-number">1.1.8.</span> <span class="toc-text">分割线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.9.</span> <span class="toc-text">行内代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.10.</span> <span class="toc-text">多行代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC"><span class="toc-number">1.1.11.</span> <span class="toc-text">表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%BD%AE%E9%A1%B6"><span class="toc-number">1.1.12.</span> <span class="toc-text">文章置顶</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring-MVC%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%E7%AC%94%E8%AE%B0%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">spring_MVC原理解析笔记记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E8%80%85-%E8%A8%80%E7%AC%91"><span class="toc-number">1.1.</span> <span class="toc-text">作者 言笑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springMVC%E5%8E%9F%E7%90%86%E5%9B%BE%E7%89%87%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.2.</span> <span class="toc-text">springMVC原理图片说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="toc-number">1.1.3.</span> <span class="toc-text">代码演示</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
