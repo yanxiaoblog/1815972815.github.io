@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://1815972815.github.io">
-  <title>Archives: 2021/9 | Hexo</title>
+  <title>mybatis的一对多和多对一 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://1815972815.github.io/archives/2021/09/index.html">
+  <meta name="description" content="mybatis中的一对多和多对一处理作者：言笑一对多和多对一的现象在现实中普遍存在，并且站在不同的角度上又有不同的结果，比如：老师和学生的关系，站在学生的角度去看，多个学生都是被这一个老师教的，即多个学生关联一个老师，这就是多对一的关系，而站在老师的角度去看，就是一个老师教多个学生，即一个老师关联一个集合，这就是多对一的关系。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis的一对多和多对一">
+<meta property="og:url" content="http://1815972815.github.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="mybatis中的一对多和多对一处理作者：言笑一对多和多对一的现象在现实中普遍存在，并且站在不同的角度上又有不同的结果，比如：老师和学生的关系，站在学生的角度去看，多个学生都是被这一个老师教的，即多个学生关联一个老师，这就是多对一的关系，而站在老师的角度去看，就是一个老师教多个学生，即一个老师关联一个集合，这就是多对一的关系。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg">
+<meta property="article:published_time" content="2021-09-27T06:43:20.000Z">
+<meta property="article:modified_time" content="2021-09-27T08:54:12.034Z">
 <meta property="article:author" content="YanXiao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://1815972815.github.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -162,194 +169,263 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-mybatis的一对多和多对一" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/27/mybatis%E5%8A%A8%E6%80%81SQL/" class="archive-article-date">
-  	<time datetime="2021-09-27T09:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/27/mybatis%E5%8A%A8%E6%80%81SQL/">mybatis动态SQL</a>
+    <h1 class="article-title" itemprop="name">
+      mybatis的一对多和多对一
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        <!--显示阅读次数-->
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/" class="archive-article-date">
+        
+        <a href="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/" class="archive-article-date">
   	<time datetime="2021-09-27T06:43:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/">mybatis的一对多和多对一</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mybatis中的一对多和多对一处理"><a href="#mybatis中的一对多和多对一处理" class="headerlink" title="mybatis中的一对多和多对一处理"></a>mybatis中的一对多和多对一处理</h1><h2 id="作者：言笑"><a href="#作者：言笑" class="headerlink" title="作者：言笑"></a>作者：言笑</h2><p>一对多和多对一的现象在现实中普遍存在，并且站在不同的角度上又有不同的结果，比如：老师和学生的关系，<br>站在学生的角度去看，多个学生都是被这一个老师教的，即多个学生关联一个老师，这就是多对一的关系，而<br>站在老师的角度去看，就是一个老师教多个学生，即一个老师关联一个集合，这就是多对一的关系。</p>
+<span id="more"></span>
+<h2 id="多对一的处理"><a href="#多对一的处理" class="headerlink" title="多对一的处理"></a>多对一的处理</h2><p>多对一的处理方式有两种，第一种是按照查询嵌套处理，第二种是按照结果嵌套处理。<br>（因为在前面的增删改查实现里在project的pom.xml配置文件中导入了所有的依赖和解决了找不到依赖的问题<br>所以在模块的pom.xml配置文件中就不再作配置了，当然也可以将project中的配置按照需要复制到模块的配置<br>文件中，这里就不再作配置了）</p>
+<h4 id="1-环境的搭建"><a href="#1-环境的搭建" class="headerlink" title="1.环境的搭建"></a>1.环境的搭建</h4><ol>
+<li>创建两个pojo类，Student和Teacher<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class Student &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    //这里有一个teacher属性，在数据库中是teacher表中id的外键，叫tid，这里使用teacher来作</span><br><span class="line">    这个属性是因为每个学生都需要关联一个老师，如果使用int tid来代表的话就没有任何意义了，所以</span><br><span class="line">    使用一个teacher属性来关联一个老师</span><br><span class="line">    private Teacher teacher;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class Teacher &#123;</span><br><span class="line">    //多对一的时候老师不用关联学生，所以老师的属性和数据库中的属性一样，不用改变</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在dao包里创建两个对应的mapper接口（不管有没有用的上，先创建出来，把框架搭好）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface TeacherMapper &#123;</span><br><span class="line"></span><br><span class="line">    /*这里使用注解开发，这样比较方便，但是注解开发只能做一些简单的增删改查操作，复杂的操作</span><br><span class="line">    使用注解开发实现不了，如一对多和多对一的操作，这里写这个方法仅仅是为了测试搭建的环境有没有</span><br><span class="line">    搭建好使用，也作为按查询嵌套处理中使用的方法*/</span><br><span class="line">    @Select(&quot;select * from teacher&quot;)</span><br><span class="line">    List&lt;Teacher&gt; getTeachers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface StudentMapper &#123;</span><br><span class="line"></span><br><span class="line">    //按照结果嵌套查处理取所有的学生和其对应的老师</span><br><span class="line">    List&lt;Student&gt; getStudents();</span><br><span class="line"></span><br><span class="line">    //按照查询嵌套处理获取所有的学生和其对应的老师</span><br><span class="line">    List&lt;Student&gt; getStudents2();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在resource资源目录下创建和dao包路径相同的路径，并创建对应的mapper.xml配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;!--命名空间绑定，绑定对应的mapper--&gt;</span><br><span class="line">&lt;mapper namespace=&quot;com.tSmile.dao.TeacherMapper&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;!--命名空间绑定，绑定对应的mapper--&gt;</span><br><span class="line">&lt;mapper namespace=&quot;com.tSmile.dao.StudentMapper&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure></li>
+<li>将增删改查实现中的mybatisUtils复制过来使用<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//定义一个工具类获取sqlSessionFactory，通过sqlSessionFactory来获取sqlSession</span><br><span class="line">public class MybatisUtils &#123;</span><br><span class="line">    //提升作用域，方便下面写代码时调用</span><br><span class="line">    private static SqlSessionFactory sqlSessionFactory;</span><br><span class="line">    static &#123;</span><br><span class="line">        InputStream inputStream = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            //使用mybatis获取sqlSessionFactory对象</span><br><span class="line">            String resource = &quot;mybatis-config.xml&quot;;</span><br><span class="line">            inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static SqlSession getSqlSession()&#123;</span><br><span class="line">        //获取SqlSession对象</span><br><span class="line">//        openSession()方法可以有参数，如果参数为true时，将事务设置为自动提交</span><br><span class="line">        return sqlSessionFactory.openSession();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>将增删改查实现中的db.properties和mybatis-config.xml文件复制过来，并改动一下mybatis-config.xml<br>文件，改动注册的mapper和包名的别名typeAlias即可。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;!--properties标签只能写在最前面，不能写在environment、mapper等的后面</span><br><span class="line">        并且properties标签可以在标签内加入属性配置</span><br><span class="line">        如果标签内和外部文件同时拥有相同的字段，优先执行外部文件的字段--&gt;</span><br><span class="line">    &lt;properties resource=&quot;db.properties&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">        &lt;!--这里错了没关系，只要外部文件这个字段写对了就行，因为优先获取外部文件--&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line">    &lt;settings&gt;</span><br><span class="line">        &lt;!--设置使用日志的类型如：LOG4J日志，STDOUT_LOGGING标准日志--&gt;</span><br><span class="line">        &lt;setting name=&quot;logImpl&quot; value=&quot;STDOUT_LOGGING&quot;/&gt;</span><br><span class="line">    &lt;/settings&gt;</span><br><span class="line"></span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;com.tSmile.pojo.Teacher&quot; alias=&quot;Teacher&quot;/&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;com.tSmile.pojo.Student&quot; alias=&quot;Student&quot;/&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line">    &lt;!--可以配置多个环境，但是每次执行只能选择一个环境，并且会执行default默认的环境，</span><br><span class="line">        修改默认执行环境就能改变执行环境--&gt;</span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot;/&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;$&#123;driver&#125;&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;$&#123;url&#125;&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;$&#123;username&#125;&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;$&#123;password&#125;&quot;/&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    &lt;!--每一个mapper.xml都要在mybatis核心配置文件中注册</span><br><span class="line">        注册很容易被忘记，记住，一定要注册--&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper class=&quot;com.tSmile.dao.StudentMapper&quot;/&gt;</span><br><span class="line">        &lt;mapper class=&quot;com.tSmile.dao.TeacherMapper&quot;/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>创建一个TeacherTest测试类，测试环境的搭建有没有成功<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class TeacherTest &#123;</span><br><span class="line">    @Test</span><br><span class="line">    public void test01()&#123;</span><br><span class="line">        SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">        TeacherMapper mapper = sqlSession.getMapper(TeacherMapper.class);</span><br><span class="line">        List&lt;Teacher&gt; teachers = mapper.getTeachers();</span><br><span class="line">        for (Teacher teacher : teachers) &#123;</span><br><span class="line">            System.out.println(teacher);</span><br><span class="line">        &#125;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-在StudentMapper-xml文件中进行按结果嵌套处理和按查询嵌套处理"><a href="#2-在StudentMapper-xml文件中进行按结果嵌套处理和按查询嵌套处理" class="headerlink" title="2.在StudentMapper.xml文件中进行按结果嵌套处理和按查询嵌套处理"></a>2.在StudentMapper.xml文件中进行按结果嵌套处理和按查询嵌套处理</h4></li>
+<li>按结果嵌套处理：先将整个完整的sql语句写出来，再根据关联属性使用association关联属性标签将<br>关联的对象赋给对应的关联属性<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--按照结果嵌套处理--&gt;</span><br><span class="line">    &lt;-- 完整的查询语句 --&gt;</span><br><span class="line">    &lt;select id=&quot;getStudents&quot; resultMap=&quot;StuAndTeacher&quot;&gt;</span><br><span class="line">        select s.id sid, s.name sname, t.name tname, t.id tid</span><br><span class="line">        from student s, teacher t</span><br><span class="line">        where s.tid = t.id;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">    &lt;-- 使用resultMap对字段名和属性名称不同的进行映射 --&gt;</span><br><span class="line">    &lt;resultMap id=&quot;StuAndTeacher&quot; type=&quot;Student&quot;&gt;</span><br><span class="line">        &lt;result column=&quot;sid&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">        &lt;result column=&quot;sname&quot; property=&quot;name&quot;/&gt;</span><br><span class="line">        &lt;-- 关联对应的老师 property是属性名称 javaType是属性的数据类型 --&gt;</span><br><span class="line">        &lt;collection property=&quot;teacher&quot; javaType=&quot;Teacher&quot;&gt;</span><br><span class="line">            &lt;-- 映射对应的属性名称 --&gt;</span><br><span class="line">            &lt;result column=&quot;tname&quot; property=&quot;name&quot;/&gt;</span><br><span class="line">            &lt;result column=&quot;tid&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">        &lt;/collection&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br></pre></td></tr></table></figure></li>
+<li>按查询嵌套处理：先查询出所有的学生，然后将学生中的teacher属性和字段tid和根据tid查询出来的<br>老师关联起来，即两个查询通过association标签关联起来得到最终的结果<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--按照查询嵌套处理--&gt;</span><br><span class="line">    &lt;select id=&quot;getStudents2&quot; resultMap=&quot;StuAndTeacher2&quot;&gt;</span><br><span class="line">        select * from Student;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;resultMap id=&quot;StuAndTeacher2&quot; type=&quot;Student&quot;&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">            association 关联属性标签</span><br><span class="line">            properties 属性名称</span><br><span class="line">            column 数据库中的字段名称</span><br><span class="line">            javaType 属性数据类型</span><br><span class="line">            select 关联的查询操作的id</span><br><span class="line">        --&gt;</span><br><span class="line">        &lt;association property=&quot;teacher&quot; column=&quot;tid&quot; javaType=&quot;Teacher&quot; select=&quot;getTeachers&quot;/&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;select id=&quot;getTeachers&quot; resultType=&quot;Teacher&quot;&gt;</span><br><span class="line">        select * from Teacher where id=#&#123;tid&#125;;</span><br><span class="line">    &lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h4>创建StudentTest测试类进行测试<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class StudentTest &#123;</span><br><span class="line">    @Test</span><br><span class="line">    public void test01()&#123;</span><br><span class="line">        SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);</span><br><span class="line">        List&lt;Student&gt; students = mapper.getStudents();</span><br><span class="line">        for (Student student : students) &#123;</span><br><span class="line">            System.out.println(student);</span><br><span class="line">        &#125;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">    @Test</span><br><span class="line">    public void test02()&#123;</span><br><span class="line">        SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);</span><br><span class="line">        List&lt;Student&gt; students = mapper.getStudents2();</span><br><span class="line">        for (Student student : students) &#123;</span><br><span class="line">            System.out.println(student);</span><br><span class="line">        &#125;</span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-多对一的包目录结构"><a href="#4-多对一的包目录结构" class="headerlink" title="4.多对一的包目录结构"></a>4.多对一的包目录结构</h4><img src="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg"></li>
+</ol>
+<hr>
+<h2 id="一对多的处理"><a href="#一对多的处理" class="headerlink" title="一对多的处理"></a>一对多的处理</h2><p>一对多的处理方式也有两种，第一种是按照查询嵌套处理，第二种是按照结果嵌套处理。</p>
+<h4 id="1-环境的搭建-1"><a href="#1-环境的搭建-1" class="headerlink" title="1.环境的搭建"></a>1.环境的搭建</h4><p>流程和上面多对一的流程一样</p>
+<ol>
+<li>创建两个pojo类，Student和Teacher<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">public class Student &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private int tid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class Teacher &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    /*因为是一对多的关系，所以学生属性使用一个集合来表示*/</span><br><span class="line">    private List&lt;Student&gt; students;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在dao包里创建两个对应的mapper接口（不管有没有用的上，先创建出来，把框架搭好）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface StudentMapper &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface TeacherMapper &#123;</span><br><span class="line"></span><br><span class="line">    List&lt;Teacher&gt; getTeachersById(@Param(&quot;tid&quot;) int id);</span><br><span class="line"></span><br><span class="line">    List&lt;Teacher&gt; getTeachersById2(@Param(&quot;id&quot;) int id);</span><br><span class="line"></span><br><span class="line">    List&lt;Teacher&gt; getTeachers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在resource资源目录下创建和dao包路径相同的路径，并创建对应的mapper.xml配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此处参考上面多对一的流程</span><br></pre></td></tr></table></figure></li>
+<li>将增删改查实现中的mybatisUtils复制过来使用<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此处参考上面多对一的流程</span><br></pre></td></tr></table></figure></li>
+<li>将增删改查实现中的db.properties和mybatis-config.xml文件复制过来<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此处参考上面多对一的流程</span><br></pre></td></tr></table></figure></li>
+<li>在TeacherMapper.xml文件中编写SQL语句，并创建TeacherTest测试类，测试环境的搭建有没有成功<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getTeachers&quot; resultType=&quot;Teacher&quot;&gt;</span><br><span class="line">    select * from teacher;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void test01()&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">    TeacherMapper mapper = sqlSession.getMapper(TeacherMapper.class);</span><br><span class="line">    List&lt;Teacher&gt; teachers = mapper.getTeachersById(1);</span><br><span class="line">    for (Teacher teacher : teachers) &#123;</span><br><span class="line">        System.out.println(teacher);</span><br><span class="line">    &#125;</span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-在TeacherMapper-xml文件中进行按结果嵌套处理和按查询嵌套处理"><a href="#2-在TeacherMapper-xml文件中进行按结果嵌套处理和按查询嵌套处理" class="headerlink" title="2.在TeacherMapper.xml文件中进行按结果嵌套处理和按查询嵌套处理"></a>2.在TeacherMapper.xml文件中进行按结果嵌套处理和按查询嵌套处理</h4></li>
+<li>按结果嵌套处理<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getTeachersById&quot; resultMap=&quot;getTeaAndStu&quot;&gt;</span><br><span class="line">        select t.id tid,t.name tname,s.id sid,s.name sname</span><br><span class="line">        from teacher t, student s</span><br><span class="line">        where t.id=s.tid and t.id=#&#123;tid&#125;;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;resultMap id=&quot;getTeaAndStu&quot; type=&quot;Teacher&quot;&gt;</span><br><span class="line">        &lt;result property=&quot;id&quot; column=&quot;tid&quot;/&gt;</span><br><span class="line">        &lt;result property=&quot;name&quot; column=&quot;tname&quot;/&gt;</span><br><span class="line">        &lt;-- </span><br><span class="line">            一对多时使用集合标签collection</span><br><span class="line">            properties是属性名称</span><br><span class="line">            ofType是集合中泛型的数据类型</span><br><span class="line">         --&gt;</span><br><span class="line">        &lt;collection property=&quot;students&quot; ofType=&quot;Student&quot;&gt;</span><br><span class="line">            &lt;result property=&quot;id&quot; column=&quot;sid&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;name&quot; column=&quot;sname&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;tid&quot; column=&quot;tid&quot;/&gt;</span><br><span class="line">        &lt;/collection&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br></pre></td></tr></table></figure></li>
+<li>按查询嵌套处理<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getTeachersById2&quot; resultMap=&quot;getTeasStu&quot;&gt;</span><br><span class="line">        select * from teacher where id=#&#123;id&#125;;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">    &lt;resultMap id=&quot;getTeasStu&quot; type=&quot;Teacher&quot;&gt;</span><br><span class="line">        &lt;-- </span><br><span class="line">            一对多时使用集合标签collection</span><br><span class="line">            properties是属性名称</span><br><span class="line">            javaType是属性数据类型</span><br><span class="line">            ofType是集合中泛型的数据类型</span><br><span class="line">            column是教师查询结果中的id，即教师的id</span><br><span class="line">            select是关联的查询语句的id</span><br><span class="line">         --&gt;</span><br><span class="line">        &lt;collection property=&quot;students&quot; javaType=&quot;List&quot; ofType=&quot;Student&quot; select=&quot;getStudents&quot; column=&quot;id&quot;/&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br><span class="line">    &lt;select id=&quot;getStudents&quot; resultType=&quot;Student&quot;&gt;</span><br><span class="line">        select * from student where tid=#&#123;id&#125;;</span><br><span class="line">    &lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4>在TeacherTest测试类进行测试<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void test02()&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">    TeacherMapper mapper = sqlSession.getMapper(TeacherMapper.class);</span><br><span class="line">    List&lt;Teacher&gt; teachers = mapper.getTeachers();</span><br><span class="line">    for (Teacher teacher : teachers) &#123;</span><br><span class="line">        System.out.println(teacher);</span><br><span class="line">    &#125;</span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br><span class="line">@Test</span><br><span class="line">public void test03()&#123;</span><br><span class="line">    SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">    TeacherMapper mapper = sqlSession.getMapper(TeacherMapper.class);</span><br><span class="line">    List&lt;Teacher&gt; teachers = mapper.getTeachersById2(2);</span><br><span class="line">    for (Teacher teacher : teachers) &#123;</span><br><span class="line">        System.out.println(teacher);</span><br><span class="line">    &#125;</span><br><span class="line">    sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-一对多的包目录结构"><a href="#4-一对多的包目录结构" class="headerlink" title="4.一对多的包目录结构"></a>4.一对多的包目录结构</h4><img src="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg"></li>
+</ol>
+<hr>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      <!-- 增加版权声明 -->
+      
+      
+        <div class="declare">
+          <strong>本文作者：</strong>
+          
+            YanXiao
+          
+          <br>
+          <strong>本文链接：</strong>
+          <a rel="license" href="http://1815972815.github.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/">http://1815972815.github.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/</a>
+          <br>
+          <strong>版权声明：</strong>
+          本作品采用
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+          进行许可。转载请注明出处！
+          
+            <br>
+            <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+          
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      <!-- 增加版权声明结束 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/26/mybatis%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-  	<time datetime="2021-09-26T02:22:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-26</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2021/09/27/mybatis%E5%8A%A8%E6%80%81SQL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          mybatis动态SQL
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/26/mybatis%E7%9A%84%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mybatis的实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/26/mybatis%E7%9A%84%E5%AE%9E%E7%8E%B0/">mybatis的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mybatis%E4%B8%AD%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80%E5%A4%84%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">mybatis中的一对多和多对一处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E8%80%85%EF%BC%9A%E8%A8%80%E7%AC%91"><span class="toc-number">1.1.</span> <span class="toc-text">作者：言笑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">多对一的处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">1.环境的搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9C%A8StudentMapper-xml%E6%96%87%E4%BB%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E6%8C%89%E7%BB%93%E6%9E%9C%E5%B5%8C%E5%A5%97%E5%A4%84%E7%90%86%E5%92%8C%E6%8C%89%E6%9F%A5%E8%AF%A2%E5%B5%8C%E5%A5%97%E5%A4%84%E7%90%86"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">2.在StudentMapper.xml文件中进行按结果嵌套处理和按查询嵌套处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">3. 测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%8C%85%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">4.多对一的包目录结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">一对多的处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA-1"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">1.环境的搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9C%A8TeacherMapper-xml%E6%96%87%E4%BB%B6%E4%B8%AD%E8%BF%9B%E8%A1%8C%E6%8C%89%E7%BB%93%E6%9E%9C%E5%B5%8C%E5%A5%97%E5%A4%84%E7%90%86%E5%92%8C%E6%8C%89%E6%9F%A5%E8%AF%A2%E5%B5%8C%E5%A5%97%E5%A4%84%E7%90%86"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">2.在TeacherMapper.xml文件中进行按结果嵌套处理和按查询嵌套处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%B8%80%E5%AF%B9%E5%A4%9A%E7%9A%84%E5%8C%85%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">4.一对多的包目录结构</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/11/springmvc/" class="archive-article-date">
-  	<time datetime="2021-09-11T01:57:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-11</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/11/springmvc/">springmvc</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/06/myblog/" class="archive-article-date">
-  	<time datetime="2021-09-06T13:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/06/myblog/">我的第一篇博客文章</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/06/hello-world/" class="archive-article-date">
-  	<time datetime="2021-09-06T08:01:55.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/06/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
 
 
           </div>
@@ -382,8 +458,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
