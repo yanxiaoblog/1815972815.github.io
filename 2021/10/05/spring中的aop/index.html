@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://1815972815.github.io">
-  <title>Hello World | Hexo</title>
+  <title>spring中的aop | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="作者：言笑 什么是aop？aop就是面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。简单来说就是不改变源代码对程序进行增强和维护的编程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://1815972815.github.io/2021/09/06/hello-world/index.html">
+<meta property="og:title" content="spring中的aop">
+<meta property="og:url" content="http://1815972815.github.io/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="作者：言笑 什么是aop？aop就是面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。简单来说就是不改变源代码对程序进行增强和维护的编程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-06T08:01:55.240Z">
-<meta property="article:modified_time" content="2021-09-11T07:55:48.301Z">
+<meta property="og:image" content="http://1815972815.github.io/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/aop%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
+<meta property="article:published_time" content="2021-10-05T06:42:11.000Z">
+<meta property="article:modified_time" content="2021-10-05T09:11:44.685Z">
 <meta property="article:author" content="YanXiao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://1815972815.github.io/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/aop%E5%8E%9F%E7%90%86%E5%9B%BE.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -166,14 +168,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-spring中的aop" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      spring中的aop
     </h1>
   
 
@@ -188,36 +190,83 @@
   </a>
   
         
-        <a href="/2021/09/06/hello-world/" class="archive-article-date">
-  	<time datetime="2021-09-06T08:01:55.240Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-06</time>
+        <a href="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/" class="archive-article-date">
+  	<time datetime="2021-10-05T06:42:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+        <p>作者：言笑</p>
+<h3 id="什么是aop？"><a href="#什么是aop？" class="headerlink" title="什么是aop？"></a>什么是aop？</h3><p>aop就是面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。<br>简单来说就是不改变源代码对程序进行增强和维护的编程。</p>
 <span id="more"></span>
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="aop的底层原理"><a href="#aop的底层原理" class="headerlink" title="aop的底层原理"></a>aop的底层原理</h3><ol>
+<li>有接口的情况，使用JDK动态代理，创建接口实现类代理对象，增强类的方法</li>
+<li>没有接口的情况，使用cglib动态代理，创建子类代理对象，增强类的方法</li>
+</ol>
+<h3 id="aop术语"><a href="#aop术语" class="headerlink" title="aop术语"></a>aop术语</h3><ol>
+<li>连接点：所有可以被增强的目标类的方法</li>
+<li>切入点：实际被增强的目标类的方法</li>
+<li>通知：增强类中的方法<ol>
+<li>前置通知：在执行被增强方法前执行的增强</li>
+<li>后置通知：在执行被增强方法后执行的增强</li>
+<li>环绕通知：在执行被增强方法的前后都执行的增强</li>
+<li>异常通知：执行被增强方法出现异常的通知</li>
+<li>最终通知：类似于finally的执行</li>
+</ol>
+</li>
+<li>切面：用于增强目标类的类</li>
+</ol>
+<h3 id="aop的理解图"><a href="#aop的理解图" class="headerlink" title="aop的理解图"></a>aop的理解图</h3><p><img src="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/aop%E5%8E%9F%E7%90%86%E5%9B%BE.jpg"></p>
+<h3 id="使用spring实现aop的三种方式"><a href="#使用spring实现aop的三种方式" class="headerlink" title="使用spring实现aop的三种方式"></a>使用spring实现aop的三种方式</h3><ol>
+<li>通过spring API实现</li>
+<li>通过自定义类实现</li>
+<li>通过注解实现</li>
+</ol>
+<h3 id="通过spring-API实现"><a href="#通过spring-API实现" class="headerlink" title="通过spring API实现"></a>通过spring API实现</h3><ol>
+<li>在模块的pom.xml配置文件中导入aspectj依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.9.7&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在aop包下创建两个切面<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//实现后置增强接口</span><br><span class="line">public class After implements AfterReturningAdvice &#123;</span><br><span class="line">    public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable &#123;</span><br><span class="line">        System.out.println(&quot;【&quot; + target.getClass().getName() + &quot;】类的【&quot; + method.getName() +</span><br><span class="line">                &quot;】方法的 后 置增强方法执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//实现前置增强接口</span><br><span class="line">public class Before implements MethodBeforeAdvice &#123;</span><br><span class="line">    /*参数：</span><br><span class="line">    * method 要执行的目标对象的方法</span><br><span class="line">    * args 要执行的目标对象的方法的参数</span><br><span class="line">    * target 要执行的目标对象*/</span><br><span class="line">    public void before(Method method, Object[] args, Object target) throws Throwable &#123;</span><br><span class="line">        System.out.println(&quot;【&quot; + target.getClass().getName() + &quot;】类的【&quot; + method.getName() +</span><br><span class="line">                &quot;】方法的 前 置增强方法执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建爱你Service接口和其实现类ServiceImpl<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface Service &#123;</span><br><span class="line">    void add();</span><br><span class="line">    void query();</span><br><span class="line">    void update();</span><br><span class="line">    void delete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class ServiceImpl implements Service &#123;</span><br><span class="line">    public void add() &#123;</span><br><span class="line">        System.out.println(&quot;增加方法执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void query() &#123;</span><br><span class="line">        System.out.println(&quot;查询方法执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void update() &#123;</span><br><span class="line">        System.out.println(&quot;更新方法执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void delete() &#123;</span><br><span class="line">        System.out.println(&quot;删除方法执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建applicationContext.xml配置文件，并进行配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">        https://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        https://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--注册bean--&gt;</span><br><span class="line">&lt;bean id=&quot;afterLog&quot; class=&quot;com.tSmile.log.After&quot;/&gt;</span><br><span class="line">&lt;bean id=&quot;beforeLog&quot; class=&quot;com.tSmile.log.Before&quot;/&gt;</span><br><span class="line">&lt;bean id=&quot;service&quot; class=&quot;com.tSmile.service.ServiceImpl&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--方式一：使用原生的spring api接口动态代理--&gt;</span><br><span class="line">&lt;!--要使用aop标签，需要引入aop命名空间--&gt;</span><br><span class="line">&lt;aop:config&gt;</span><br><span class="line">    &lt;!--切入点：定位到某个方法作为通知的切入点</span><br><span class="line">    expression表达式：expression=&quot;execution(修饰符 类的全线路径.方法名(参数))--&gt;</span><br><span class="line">    &lt;aop:pointcut id=&quot;pointcut&quot; expression=&quot;execution(* com.tSmile.service.ServiceImpl.*(..))&quot;/&gt;</span><br><span class="line">    &lt;!--将增强方法插入到切入点之前或者之后--&gt;</span><br><span class="line">    &lt;aop:advisor advice-ref=&quot;afterLog&quot; pointcut-ref=&quot;pointcut&quot;/&gt;</span><br><span class="line">    &lt;aop:advisor advice-ref=&quot;beforeLog&quot; pointcut-ref=&quot;pointcut&quot;/&gt;</span><br><span class="line">&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure></li>
+<li>创建MyTest测试类，并进行测试<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    public void test01() &#123;</span><br><span class="line">        ApplicationContext context = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);</span><br><span class="line">        /*这里必须使用接口来定义这个对象的类型，因为动态代理对象时根据接口来创建代理的，如果</span><br><span class="line">        * 没有定义成接口数据类型，就无法创建对应的代理对象*/</span><br><span class="line">        Service service = (Service) context.getBean(&quot;service&quot;);</span><br><span class="line">        service.add();</span><br><span class="line">        System.out.println(&quot;*************************&quot;);</span><br><span class="line">        service.query();</span><br><span class="line">        System.out.println(&quot;*************************&quot;);</span><br><span class="line">        service.update();</span><br><span class="line">        System.out.println(&quot;*************************&quot;);</span><br><span class="line">        service.delete();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="通过自定义类实现"><a href="#通过自定义类实现" class="headerlink" title="通过自定义类实现"></a>通过自定义类实现</h3></li>
+<li>在diy包下创建一个Diy类<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Diy &#123;</span><br><span class="line">    public void before()&#123;</span><br><span class="line">        System.out.println(&quot;======目标方法执行【前】的增强======&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void after()&#123;</span><br><span class="line">        System.out.println(&quot;======目标方法执行【后】的增强======&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>修改配置文件applicationContext.xml，注释掉方式一（注册bean不要注释掉），配置方式二<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--方式二：使用切面进行增强，方式二没有方式一强大，因为方式一可以通过反射获取到类和切点方法的所有</span><br><span class="line">    东西，但是方式一要写多个类实现对应的接口，没有方法二简单--&gt;</span><br><span class="line">    &lt;bean id=&quot;diy&quot; class=&quot;com.tSmile.diy.Diy&quot;/&gt;</span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">        &lt;!--将diy类作为切面，即将diy中的方法作为增强功能切入到目标方法的前面或者后面--&gt;</span><br><span class="line">        &lt;aop:aspect ref=&quot;diy&quot;&gt;</span><br><span class="line">            &lt;aop:pointcut id=&quot;pointcut1&quot; expression=&quot;execution(* com.tSmile.service.ServiceImpl.*(..))&quot;/&gt;</span><br><span class="line">            &lt;aop:before method=&quot;before&quot; pointcut-ref=&quot;pointcut1&quot;/&gt;</span><br><span class="line">            &lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;pointcut1&quot;/&gt;</span><br><span class="line">        &lt;/aop:aspect&gt;</span><br><span class="line">    &lt;/aop:config&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在MyTest测试类中使用原来的测试代码进行测试</li>
+</ol>
+<h3 id="通过注解实现"><a href="#通过注解实现" class="headerlink" title="通过注解实现"></a>通过注解实现</h3><ol>
+<li>在diy包下创建一个DiyAspect类<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//使用注解@Aspect将这个类定义成一个切面</span><br><span class="line">@Aspect</span><br><span class="line">public class DiyAspect &#123;</span><br><span class="line">    //使用@Pointcut注解将切入点抽取出来</span><br><span class="line">    @Pointcut(value = &quot;execution(* com.tSmile.service.ServiceImpl.*(..))&quot;)</span><br><span class="line">    public void pointDemo()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    @Before(value = &quot;pointDemo()&quot;)</span><br><span class="line">    public void before()&#123;</span><br><span class="line">        System.out.println(&quot;=====执行目标方法【前】的方法执行了=====&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @After(value = &quot;pointDemo()&quot;)</span><br><span class="line">    public void after()&#123;</span><br><span class="line">        System.out.println(&quot;=====执行目标方法【后】的方法执行了=====&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Around(value = &quot;pointDemo()&quot;)</span><br><span class="line">    public void around(ProceedingJoinPoint pj) throws Throwable &#123;</span><br><span class="line">        System.out.println(&quot;=====执行目标方法【前】的【around】方法执行了=====&quot;);</span><br><span class="line">        //执行目标方法</span><br><span class="line">        /*也可以使用pj来获取有关目标方法的信息</span><br><span class="line">        * 如：获取切入点方法所在的目标类</span><br><span class="line">        Object target = pj.getTarget();*/</span><br><span class="line">        pj.proceed();</span><br><span class="line">        System.out.println(&quot;=====执行目标方法【后】的【around】方法执行了=====&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>修改配置文件applicationContext.xml，注释掉方式二（注册bean不要注释掉），配置方式三<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--方式三：使用注解进行aop切面编程--&gt;</span><br><span class="line">    &lt;bean id=&quot;diyAspect&quot; class=&quot;com.tSmile.diy.DiyAspect&quot;/&gt;</span><br><span class="line">    &lt;!--开启注解支持</span><br><span class="line">    属性：</span><br><span class="line">    proxy-target-class=&quot;false&quot; 默认使用JDK的动态代理</span><br><span class="line">    proxy-target-class=&quot;true&quot; 使用cglib动态代理</span><br><span class="line">    一般使用默认的JDK动态代理，所以这个属性一般不设置--&gt;</span><br><span class="line">    &lt;aop:aspectj-autoproxy/&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在MyTest测试类中使用原来的测试代码进行测试</li>
+</ol>
 
       
 
       <!-- 增加版权声明 -->
       
       
-        <div class="declare" hidden="hidden"></div>
+        <div class="declare">
+          <strong>本文作者：</strong>
+          
+            YanXiao
+          
+          <br>
+          <strong>本文链接：</strong>
+          <a rel="license" href="http://1815972815.github.io/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/">http://1815972815.github.io/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/</a>
+          <br>
+          <strong>版权声明：</strong>
+          本作品采用
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+          进行许可。转载请注明出处！
+          
+            <br>
+            <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+          
+        </div>
       
 
       <!-- 增加版权声明结束 -->
@@ -308,7 +357,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/09/06/hello-world/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -323,15 +372,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/09/06/myblog/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/05/sping%E5%92%8Cmybatis%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          我的第一篇博客文章
+          sping和mybatis整合流程
         
       </div>
     </a>
   
+  
+    <a href="/2021/10/05/proxy%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">proxy代理模式</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -356,7 +410,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFaop%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是aop？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aop%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">aop的底层原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aop%E6%9C%AF%E8%AF%AD"><span class="toc-number">3.</span> <span class="toc-text">aop术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aop%E7%9A%84%E7%90%86%E8%A7%A3%E5%9B%BE"><span class="toc-number">4.</span> <span class="toc-text">aop的理解图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8spring%E5%AE%9E%E7%8E%B0aop%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">使用spring实现aop的三种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87spring-API%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.</span> <span class="toc-text">通过spring API实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%AE%9E%E7%8E%B0"><span class="toc-number">7.</span> <span class="toc-text">通过自定义类实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.</span> <span class="toc-text">通过注解实现</span></a></li></ol>
                     </div>
                 </span>
             </div>
