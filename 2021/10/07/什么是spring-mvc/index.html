@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://1815972815.github.io">
-  <title>mybatis缓存 | Hexo</title>
+  <title>什么是spring-mvc | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="mybatis缓存的实现与原理简介 什么是缓存？存在内存中的临时数据就是缓存（cache） 为什么使用缓存？减少和数据库交互的次数，减少系统的开销，提高系统的效率 什么数据适合使用缓存？经常被访问的并且不经常改变的数据适合使用缓存">
+  <meta name="description" content="作者：言笑 什么是MVC？ M：model（模型），提供要展示的数据，包含数据和行为 V：view（视图），负责进行模型的展示 C：controller（控制器），接收用户请求给模型处理，然后再将模型处理完的数据返回给视图（调度者）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis缓存">
-<meta property="og:url" content="http://1815972815.github.io/2021/09/29/mybatis%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:title" content="什么是spring-mvc">
+<meta property="og:url" content="http://1815972815.github.io/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="mybatis缓存的实现与原理简介 什么是缓存？存在内存中的临时数据就是缓存（cache） 为什么使用缓存？减少和数据库交互的次数，减少系统的开销，提高系统的效率 什么数据适合使用缓存？经常被访问的并且不经常改变的数据适合使用缓存">
+<meta property="og:description" content="作者：言笑 什么是MVC？ M：model（模型），提供要展示的数据，包含数据和行为 V：view（视图），负责进行模型的展示 C：controller（控制器），接收用户请求给模型处理，然后再将模型处理完的数据返回给视图（调度者）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://1815972815.github.io/2021/09/29/mybatis%E7%BC%93%E5%AD%98/mybatis-%E7%BC%93%E5%AD%98%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.jpg">
-<meta property="article:published_time" content="2021-09-29T06:47:28.000Z">
-<meta property="article:modified_time" content="2021-09-29T08:34:07.010Z">
+<meta property="og:image" content="http://1815972815.github.io/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/springmvc%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.jpg">
+<meta property="article:published_time" content="2021-10-07T12:54:16.000Z">
+<meta property="article:modified_time" content="2021-10-07T14:26:01.536Z">
 <meta property="article:author" content="YanXiao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://1815972815.github.io/2021/09/29/mybatis%E7%BC%93%E5%AD%98/mybatis-%E7%BC%93%E5%AD%98%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.jpg">
+<meta name="twitter:image" content="http://1815972815.github.io/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/springmvc%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -168,14 +168,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-mybatis缓存" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-什么是spring-mvc" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      mybatis缓存
+      什么是spring-mvc
     </h1>
   
 
@@ -190,58 +190,45 @@
   </a>
   
         
-        <a href="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  	<time datetime="2021-09-29T06:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-29</time>
+        <a href="/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/" class="archive-article-date">
+  	<time datetime="2021-10-07T12:54:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="mybatis缓存的实现与原理"><a href="#mybatis缓存的实现与原理" class="headerlink" title="mybatis缓存的实现与原理"></a>mybatis缓存的实现与原理</h2><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ol>
-<li>什么是缓存？<br>存在内存中的临时数据就是缓存（cache）</li>
-<li>为什么使用缓存？<br>减少和数据库交互的次数，减少系统的开销，提高系统的效率</li>
-<li>什么数据适合使用缓存？<br>经常被访问的并且不经常改变的数据适合使用缓存<span id="more"></span>
-<h4 id="mybatis中的缓存"><a href="#mybatis中的缓存" class="headerlink" title="mybatis中的缓存"></a>mybatis中的缓存</h4>mybatis系统默认定义了两个缓存，包括一级缓存和二级缓存</li>
-<li>默认系统开启一级缓存，即sqlSession级别的缓存</li>
-<li>二级缓存需要手动开启，是namespace级别的缓存</li>
+        <p>作者：言笑</p>
+<h3 id="什么是MVC？"><a href="#什么是MVC？" class="headerlink" title="什么是MVC？"></a>什么是MVC？</h3><ol>
+<li>M：model（模型），提供要展示的数据，包含数据和行为</li>
+<li>V：view（视图），负责进行模型的展示</li>
+<li>C：controller（控制器），接收用户请求给模型处理，然后再将模型处理完的数据返回给视图（调度者）<span id="more"></span>
+<h3 id="MVC框架的作用"><a href="#MVC框架的作用" class="headerlink" title="MVC框架的作用"></a>MVC框架的作用</h3></li>
+<li>将URL地址映射到类或者类的方法上</li>
+<li>封装用户提交的数据</li>
+<li>处理请求，调用相关的业务处理，封装相应的数据</li>
+<li>将相应的数据中部分视图的数据进行拼接，得到对应的jsp页面的路径</li>
 </ol>
-<h4 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h4><ol>
-<li>一级缓存也叫本地缓存，在同一次会话中与mysql交互查询到的结果会被缓存到一级缓存中，如果在同一次会话中<br>查找相同的内容时，就不会到数据库中查找了，会直接从缓存中查找，然后返回结果，这样能减少与数据库交互的<br>次数，提高查询的效率。</li>
-<li>一级缓存失效的情况：<ol>
-<li>没有在同一个sqlSession中，即没有在同一个会话中，会导致一级缓存失败，因为每个sqlSession的<br>一级缓存是独立的</li>
-<li>在同一个sqlSession中，但是查询的语句不同，也会导致一级缓存失败，因为一级缓存就是一个map，key<br>不同，找到的数据才会相同</li>
-<li>在同一个sqlSession中，并且查询语句相同，但是如果在两次相同的查询中执行了增删改操作，一级<br>缓存也会失败，因为数据库中的数据被修改了，如果缓存不失效，那么缓存中的数据就会和数据库中的数据<br>不一致，导致数据的不安全</li>
-<li>手动清除一级缓存后，一级缓存也会失效 </li>
-</ol>
-</li>
-</ol>
-<h4 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h4><ol>
-<li>二级缓存也叫全局缓存，因为一级缓存的作用域太低，当关闭会话后，一级缓存中的数据也就被清除了，<br>但是第二个会话可能要使用到这个结果，如果和数据库交互的话，效率太低，所以诞生了二级缓存</li>
-<li>二级缓存的作用域地一个名称空间下，即作用域为namespace</li>
-<li>开启了二级缓存后，在关闭一级缓存后回将一级缓存中的数据保存到二级缓存中，这样其他会话查找同<br>样的结果时就能直接从二级缓存中取到了</li>
-<li>二级缓存的使用步骤：<ol>
-<li>在mybatis-config.xml中的settings标签中开启二级缓存：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure></li>
-<li>在对应的mapper.xml中配置使用二级缓存,官方文档示例<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;-- 创建一个FIFO缓存，每6秒刷新一次，缓存最多可以存对象或列表的512个引用，将缓存中的数据设置为只读 --&gt;</span><br><span class="line">&lt;cache eviction=&quot;FIFO&quot; flushInterval=&quot;6000&quot; size=&quot;512&quot; readOnly=&quot;true&quot;/&gt;</span><br><span class="line">&lt;-- 一般开启缓存什么都不设置，即 &lt;cache/&gt; 即可 --&gt;</span><br></pre></td></tr></table></figure></li>
-<li>在同一个mapper中，如果将数据存到二级缓存中，不同的sqlSession都可以拿到数据</li>
-</ol>
-</li>
-</ol>
-<h4 id="缓存的执行原理图"><a href="#缓存的执行原理图" class="headerlink" title="缓存的执行原理图"></a>缓存的执行原理图</h4><p><img src="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/mybatis-%E7%BC%93%E5%AD%98%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.jpg"></p>
-<p>开启了二级缓存的情况下，并且是对同一个mapper下，二级缓存才起作用</p>
-<h4 id="使用第三方缓存——ehcache"><a href="#使用第三方缓存——ehcache" class="headerlink" title="使用第三方缓存——ehcache"></a>使用第三方缓存——ehcache</h4><p> 使用第三方缓存功能更加强大，对于EhCache可以到百度百科搜索相关信息,一下是EhCache的使用流程：</p>
+<h3 id="什么是springMVC？"><a href="#什么是springMVC？" class="headerlink" title="什么是springMVC？"></a>什么是springMVC？</h3><p>SpringMVC 是一种基于 Java 的实现 MVC 设计模型的请求驱动类型的轻量级 Web 框架</p>
+<h3 id="springMVC的执行原理"><a href="#springMVC的执行原理" class="headerlink" title="springMVC的执行原理"></a>springMVC的执行原理</h3><p><img src="/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/springmvc%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86.jpg"><br>springMVC执行流程简要分析：</p>
+<p>注：dispatcherServlet是整个springMVC的控制中心，它接收用户请求的数据，然后将数据进行封装，<br>并拦截请求</p>
 <ol>
-<li>在module中的pom.xml移入相关依赖<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-ehcache --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></li>
-<li>在mapper.xml中使用ehcache缓存<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;cache type=&quot;org.mybatis.caches.ehcache.EhcacheCache&quot;/&gt;</span><br></pre></td></tr></table></figure></li>
-<li>在resource资源包中创建ehcache.xml配置文件，并进行配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;ehcache xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:noNamespaceSchemaLocation=&quot;http://ehcache.org/ehcache.xsd&quot;</span><br><span class="line">         updateCheck=&quot;false&quot;&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">   diskStore：为缓存路径，ehcache分为内存和磁盘两级，此属性定义磁盘的缓存位置。参数解释如下：</span><br><span class="line">   user.home – 用户主目录</span><br><span class="line">   user.dir – 用户当前工作目录</span><br><span class="line">   java.io.tmpdir – 默认临时文件路径</span><br><span class="line"> --&gt;</span><br><span class="line">&lt;diskStore path=&quot;./tmpdir/Tmp_EhCache&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;defaultCache</span><br><span class="line">        eternal=&quot;false&quot;</span><br><span class="line">        maxElementsInMemory=&quot;10000&quot;</span><br><span class="line">        overflowToDisk=&quot;false&quot;</span><br><span class="line">        diskPersistent=&quot;false&quot;</span><br><span class="line">        timeToIdleSeconds=&quot;1800&quot;</span><br><span class="line">        timeToLiveSeconds=&quot;259200&quot;</span><br><span class="line">        memoryStoreEvictionPolicy=&quot;LRU&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;cache</span><br><span class="line">        name=&quot;cloud_user&quot;</span><br><span class="line">        eternal=&quot;false&quot;</span><br><span class="line">        maxElementsInMemory=&quot;5000&quot;</span><br><span class="line">        overflowToDisk=&quot;false&quot;</span><br><span class="line">        diskPersistent=&quot;false&quot;</span><br><span class="line">        timeToIdleSeconds=&quot;1800&quot;</span><br><span class="line">        timeToLiveSeconds=&quot;1800&quot;</span><br><span class="line">        memoryStoreEvictionPolicy=&quot;LRU&quot;/&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">   defaultCache：默认缓存策略，当ehcache找不到定义的缓存时，则使用这个缓存策略。只能定义一个。</span><br><span class="line"> --&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">  name:缓存名称。</span><br><span class="line">  maxElementsInMemory:缓存最大数目</span><br><span class="line">  maxElementsOnDisk：硬盘最大缓存个数。</span><br><span class="line">  eternal:对象是否永久有效，一但设置了，timeout将不起作用。</span><br><span class="line">  overflowToDisk:是否保存到磁盘，当系统当机时</span><br><span class="line">  timeToIdleSeconds:设置对象在失效前的允许闲置时间（单位：秒）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。</span><br><span class="line">  timeToLiveSeconds:设置对象在失效前允许存活时间（单位：秒）。最大时间介于创建时间和失效时间之间。仅当eternal=false对象不是永久有效时使用，默认是0.，也就是对象存活时间无穷大。</span><br><span class="line">  diskPersistent：是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false.</span><br><span class="line">  diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。</span><br><span class="line">  diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。</span><br><span class="line">  memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。</span><br><span class="line">  clearOnFlush：内存数量最大时是否清除。</span><br><span class="line">  memoryStoreEvictionPolicy:可选策略有：LRU（最近最少使用，默认策略）、FIFO（先进先出）、LFU（最少访问次数）。</span><br><span class="line">  FIFO，first in first out，这个是大家最熟的，先进先出。</span><br><span class="line">  LFU， Less Frequently Used，就是上面例子中使用的策略，直白一点就是讲一直以来最少被使用的。如上面所讲，缓存的元素有一个hit属性，hit值最小的将会被清出缓存。</span><br><span class="line">  LRU，Least Recently Used，最近最少使用的，缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">&lt;/ehcache&gt;</span><br></pre></td></tr></table></figure></li>
+<li>dispatcherServlet调用handleMapping（处理器映射器），handlerMapping根据url地址找到对应的handler</li>
+<li>handlerMapping调用handlerExecution对handler进行解析</li>
+<li>handlerExecution将解析好的数据返回给dispatcherServlet</li>
+<li>dispatcherServlet将解析好的数据传给handlerAdapter（处理器适配器）</li>
+<li>handlerAdapter按照特定的规则执行对应的handler（即Controller）</li>
+<li>Controller调用service，service将数据返回给Controller</li>
+<li>Controller将数据封装成model（数据模型），并将数据模型和视图逻辑名返回给handlerAdapter</li>
+<li>handlerAdapter将数据模型数据模型和视图逻辑名返回给dispatcherServlet</li>
+<li>dispatcherServlet调用viewResolver（视图解析器）将视图逻辑名进行解析和拼接</li>
+<li>viewResolver将解析和拼接完成的结果返回给dispatcherServlet</li>
+<li>dispatcherServlet根据解析完的拼接完的结果调用具体的视图</li>
+<li>调用视图后将结果显示给用户</li>
 </ol>
-<h4 id="缓存测试"><a href="#缓存测试" class="headerlink" title="缓存测试"></a>缓存测试</h4><ol>
-<li>复制MybatisUtils工具类，db.properties和mybatis-config.xml到这个module中对应的位置，并对mybatis-config.xml<br>进行修改</li>
-<li>创建一个User的pojo类<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class User implements Serializable &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String password;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>在dao目录下创建对应的UserMapper和UserMapper.xml<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper &#123;</span><br><span class="line"></span><br><span class="line">    User getUserById(int id);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getUserById&quot; parameterType=&quot;_int&quot; resultType=&quot;User&quot;&gt;</span><br><span class="line">    select * from `user` where id = #&#123;id&#125;;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></li>
-<li>创建测试类<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    public void test04()&#123;</span><br><span class="line">        SqlSession sqlSession = MybatisUtils.getSqlSession();</span><br><span class="line">        UserMapper mapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">        //查询后会将数据放到一级缓存中</span><br><span class="line">        User user1 = mapper.getUserById(2);</span><br><span class="line">        System.out.println(user1);</span><br><span class="line">        System.out.println(&quot;===================================&quot;);</span><br><span class="line">        //再次查询就从一级缓存中获取，不走数据库了</span><br><span class="line">        User user2 = mapper.getUserById(2);</span><br><span class="line">        System.out.println(user2);</span><br><span class="line">        System.out.println(&quot;====================================&quot;);</span><br><span class="line">        //当会话session提交后，会将一级缓存的数据放到二级缓存中，并清空一级缓存</span><br><span class="line">        sqlSession.close();</span><br><span class="line">        //在同一个namespace中再次获取一个sqlSession</span><br><span class="line">        SqlSession sqlSession1 = MybatisUtils.getSqlSession();</span><br><span class="line">        UserMapper mapper1 = sqlSession1.getMapper(UserMapper.class);</span><br><span class="line">        //获取的数据会从二级缓存中找到，并直接返回</span><br><span class="line">        User user3 = mapper1.getUserById(2);</span><br><span class="line">        System.out.println(user3);</span><br><span class="line">        System.out.println(&quot;=====================================&quot;);</span><br><span class="line">        //要获取的数据从二级缓存中找不到，就会去这个sqlSession中的一个缓存中找数据，</span><br><span class="line">        //找不到后就到数据库中找</span><br><span class="line">        User user4 = mapper1.getUserById(3);</span><br><span class="line">        System.out.println(&quot;======================================&quot;);</span><br><span class="line">        //要获取的数据从二级缓存中找不到，就会去这个sqlSession中的一个缓存中找数据，</span><br><span class="line">        //在一级缓存中找到了数据，直接返回数据</span><br><span class="line">        User user5 = mapper1.getUserById(3);</span><br><span class="line">        System.out.println(user5);</span><br><span class="line">        sqlSession1.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
+<hr>
+<p>本文是观看狂神说B站视频后参考狂神说笔记写的笔记—-侵权删</p>
+<p>原文地址:<br><code>https://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg%3D%3D&amp;chksm=ce6104e1f9168df7f98 eea39bd8478bb5082853ec8727c9da58c894625c43d44ebd64d36e2a8&amp;idx=1&amp;mid=2247483970&amp;sc ene=21&amp;sn=352e571ee88957ce391e972344e2a3d7#wechat_redirect</code></p>
 
       
 
@@ -255,7 +242,7 @@
           
           <br>
           <strong>本文链接：</strong>
-          <a rel="license" href="http://1815972815.github.io/2021/09/29/mybatis%E7%BC%93%E5%AD%98/">http://1815972815.github.io/2021/09/29/mybatis%E7%BC%93%E5%AD%98/</a>
+          <a rel="license" href="http://1815972815.github.io/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/">http://1815972815.github.io/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/</a>
           <br>
           <strong>版权声明：</strong>
           本作品采用
@@ -356,7 +343,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/09/29/mybatis%E7%BC%93%E5%AD%98/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -371,18 +358,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/10/04/ioc%E5%8E%9F%E7%90%86%E5%8F%8Aspring%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/07/%E7%AC%AC%E4%B8%80%E4%B8%AAspringMVC%E7%A8%8B%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          ioc原理及spring快速上手
+          第一个springMVC程序
         
       </div>
     </a>
   
   
-    <a href="/2021/09/27/mybatis%E5%8A%A8%E6%80%81SQL/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mybatis动态SQL</div>
+    <a href="/2021/10/05/spring%E4%BA%8B%E5%8A%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">spring事务</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -409,7 +396,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mybatis%E7%BC%93%E5%AD%98%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">mybatis缓存的实现与原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.0.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mybatis%E4%B8%AD%E7%9A%84%E7%BC%93%E5%AD%98"><span class="toc-number">1.0.2.</span> <span class="toc-text">mybatis中的缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-number">1.0.3.</span> <span class="toc-text">一级缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="toc-number">1.0.4.</span> <span class="toc-text">二级缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%E5%9B%BE"><span class="toc-number">1.0.5.</span> <span class="toc-text">缓存的执行原理图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BC%93%E5%AD%98%E2%80%94%E2%80%94ehcache"><span class="toc-number">1.0.6.</span> <span class="toc-text">使用第三方缓存——ehcache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E6%B5%8B%E8%AF%95"><span class="toc-number">1.0.7.</span> <span class="toc-text">缓存测试</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMVC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是MVC？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">MVC框架的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFspringMVC%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">什么是springMVC？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#springMVC%E7%9A%84%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">springMVC的执行原理</span></a></li></ol>
                     </div>
                 </span>
             </div>
