@@ -6,15 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://1815972815.github.io">
-  <title>Archives | Hexo</title>
+  <title>spingBoot原理初探 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://1815972815.github.io/archives/page/2/index.html">
+  <meta name="description" content="摘要本文从pom.xml，然后通过My自动装配了解自动装配的原理，再探索springBoot的自动装配原理，最后通过探索main方法中的SpringApplication.run方法对springBoot的自动装配原理进行初步探析，若要深入探析，可以进行debug一步一步跟着程序往下探析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spingBoot原理初探">
+<meta property="og:url" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="摘要本文从pom.xml，然后通过My自动装配了解自动装配的原理，再探索springBoot的自动装配原理，最后通过探索main方法中的SpringApplication.run方法对springBoot的自动装配原理进行初步探析，若要深入探析，可以进行debug一步一步跟着程序往下探析。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/%E4%BE%9D%E8%B5%9601.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%89%8D.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/myConfig%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/springBootConfiguration.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/myconfig.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/EnableAutoConfiguration01.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/selectImports.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/selectImports01.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/getAutoConfigurationEntry.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/getCandidateConfigurations.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/factory.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/configurations.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/springBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/remove.jpg">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/main.webp">
+<meta property="article:published_time" content="2021-11-04T09:11:34.000Z">
+<meta property="article:modified_time" content="2021-11-05T14:39:02.517Z">
 <meta property="article:author" content="YanXiao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/%E4%BE%9D%E8%B5%9601.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -162,295 +182,264 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-spingBoot原理初探" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spingBoot原理初探
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+  
+        
+        <a href="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/" class="archive-article-date">
+  	<time datetime="2021-11-04T09:11:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-04</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>本文从pom.xml，然后通过My自动装配了解自动装配的原理，再探索springBoot的自动装配原理，最后通过探索main方法中的SpringApplication.run方法对springBoot的自动装配原理进行初步探析，若要深入探析，可以进行debug一步一步跟着程序往下探析。</p>
+<span id="more"></span>
+<h4 id="pom-xml文件的分析"><a href="#pom-xml文件的分析" class="headerlink" title="pom.xml文件的分析"></a>pom.xml文件的分析</h4><p>在创建的springBoot项目中的pom.xml文件中有一个父依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>点进去这个父依赖，会发现里面还有一个父依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再点进去这个父依赖，你会发现在这个父依赖里面全部都是自动装配的依赖,并且配置了版本号</p>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/%E4%BE%9D%E8%B5%9601.jpg"></p>
+<p>这些依赖都是已经被springBoot装配好了的，这种装配好了的依赖也叫启动器。不过这些启动器都没有被激活，不过只要在最开始的项目的pom.xml文件中导入相应的启动器（不用导入版本号，版本号已经被装配好了）就能激活对应的启动器，并对激活的启动器进行装配。</p>
+<h4 id="springBoot自动装配实例化前做的准备工作"><a href="#springBoot自动装配实例化前做的准备工作" class="headerlink" title="springBoot自动装配实例化前做的准备工作"></a>springBoot自动装配实例化前做的准备工作</h4><ol>
+<li>AbstractBeanDefinition：是spring中所有bean的抽象定义对象（bean定义）</li>
+<li>BeanDefinitionMap&lt;beanName, BeanDefinition&gt;：当bean.class被JVM类加载到内存中时，会被spring扫描到一个这个map容器中，这个容器存储了bean定义（xxxBean的BeanDefinition），但是bean此时还没有进行实例化</li>
+<li>BeanFactoryPostProcessor：实现了BeanFactoryPostProcessor这个接口的类，可以在bean实例化之前完成一些对bean的改动</li>
+<li>大致流程图：</li>
+</ol>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%89%8D.jpg"><br>5. 由上面可以知道自动装配的中装配的对象时：bean定义(BeanDefinition)</p>
+<h4 id="My自动装配"><a href="#My自动装配" class="headerlink" title="My自动装配"></a>My自动装配</h4><p>在了解springBoot的自动装配前，我们可以先写一个自己的自动装配</p>
+<ol>
+<li>导入spring-webMvc，junit，lombok依赖<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.13.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>创建一个普通的maven项目，并并在pojo包下编写两个实体类A和B，并将两个实体类注册到spring容器中<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Component(&quot;a&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value(&quot;我是AAA&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> B b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Component(&quot;b&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value(&quot;我是BBB&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在config包下创建一个MyConfig配置类，并将这两个类交给springBoot进行自动装配<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">a</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">b</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在config包下创建一个MyImportSelector类，并实现ImportSelector接口<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyImportSelector</span> <span class="keyword">implements</span> <span class="title">ImportSelector</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String[] selectImports(AnnotationMetadata importingClassMetadata) &#123;</span><br><span class="line">        <span class="comment">//读取properties配置文件</span></span><br><span class="line">        Properties properties = MyPropertyReader.readPropertyForMe(<span class="string">&quot;/MyProperty.properties&quot;</span>);</span><br><span class="line">        <span class="comment">//通过properties配置文件的key获取value</span></span><br><span class="line">        String strings = (String) properties.get(MyEnableAutoConfig.class.getName());</span><br><span class="line">        <span class="comment">//@Importer注解中返回的类如果是组件bean对象，就会被加载进来使用；如果是一个配置类，就会加载这个配置类</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]&#123;strings&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在util包下创建一个读取properties配置文件的工具类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyPropertyReader</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Properties <span class="title">readPropertyForMe</span><span class="params">(String path)</span></span>&#123;</span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        InputStream sin = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            sin = MyPropertyReader.class.getResourceAsStream(path);</span><br><span class="line">            properties.load(sin);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            System.out.println(<span class="string">&quot;读取异常...&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                sin.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> properties;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在resources包下创建一个properties文件<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">com.tSmile.config.MyEnableAutoConfig</span>=<span class="string">com.tSmile.config.MyConfig</span></span><br></pre></td></tr></table></figure></li>
+<li>在config包下创建MyEnableAutoConfig注解类，并通过@Import注解将MyImportSelector.class加载到注解类上<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Import(MyImportSelector.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyEnableAutoConfig &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在config包下创建自动配置类MyAutoConfig，并通过注解类MyEnableAutoConfig将加载到注解类上的数据加载到自动配置类中<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MyEnableAutoConfig</span> <span class="comment">//将注解中的配置类继续加载到这个配置类中</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAutoConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>创建测试类进行测试<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取所有MyConfig中所有的bean定义(beanDefinition)，并将所有的bean定义放到BeanDefinitionMap中，</span></span><br><span class="line">        <span class="comment">// 并将所有数据封装到上下文内容中</span></span><br><span class="line">        AnnotationConfigApplicationContext ac =</span><br><span class="line">                <span class="keyword">new</span> AnnotationConfigApplicationContext(MyAutoConfig.class);</span><br><span class="line">        <span class="comment">//通过上下文内容来找到对应的bean定义，调用其空参构造器来创建对象</span></span><br><span class="line">        A a = ac.getBean(<span class="string">&quot;a&quot;</span>, A.class);</span><br><span class="line">        System.out.println(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+MY自动装配编写完成！！！  </li>
+<li>MyAutoConfig自动装配流程图</li>
+</ol>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/myConfig%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg"></p>
+<h4 id="springBoot自动装配源码分析"><a href="#springBoot自动装配源码分析" class="headerlink" title="springBoot自动装配源码分析"></a>springBoot自动装配源码分析</h4><p>springBoot自动装配源码分析从启动类开始进行分析</p>
+<h5 id="启动类上的-SpringBootApplication注解"><a href="#启动类上的-SpringBootApplication注解" class="headerlink" title="启动类上的@SpringBootApplication注解"></a>启动类上的@SpringBootApplication注解</h5><p>@SpringBootApplication这个注解包含了三个注解：<br>@SpringBootConfiguration<br>@EnableAutoConfiguration<br>@ComponentScan  </p>
+<ol>
+<li>@SpringBootConfiguration注解<br>点进去发现是一个注解类，并且这个注解类上使用了@Configuration进行注解:</li>
+</ol>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/springBootConfiguration.jpg"><br>所以@SpringBootConfiguration注解的作用就是把启动类标注为一个javaConfig配置类，也就是说也可以像在上面的MyConfig配置类中一样，在启动类中添加对象进行自动装配:</p>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/myconfig.jpg"><br>2. @ComponentScan注解<br>组件扫描注解，扫描范围是springBoot启动类的同级目录及子路径<br>3. @EnableAutoConfiguration注解<br>这个注解时springBoot最核心的注解，和我们上面写的@MyEnableAutoConfiguration一样，知识在这里它变得更加复杂了，<br>点进这个注解：</p>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/EnableAutoConfiguration01.jpg"><br>这个@Import(AutoConfigurationImportSelector.class)和我们写的一样，做个注解的作用是导入了 AutoConfigurationImportSelector 这个类的bean定义，这个类实现了ImportSelector接口，那么必定实现了这个接口的方法，就是上面我们实现这个接口时实现的那个方法，点进去：<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/selectImports.jpg"><br>果然，实现了selectImports这个方法，并且返回值也是一个String数组。<br>这个数组存储的是什么呢？当然是返回的是要加载的Config配置文件的全包名，通过返回这个全包名，我们就能自动装配上这些配置文件下定义的bean对象，从而达到了自动装配的目的！和我们上面写的返回的值是一样的，也是返回存储在properties文件中的config配置全包名。<br>根据刚才我们自己实现的selectImports方法，我们是通过注解类的名字来查找，并且最终得到需要加载的Config类的全类名，最后返回的。<br>因此，这里必然有一个根据注解类名字来查找相应的Config文件的操作<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/selectImports01.jpg"><br>果然，它将一个集合放到了数组里，那么这个集合放的应该就是config配置配的全包名了。<br>这个集合时通过getAutoConfigurationEntry()方法获取的，我们点进这个方法看一下：<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/getAutoConfigurationEntry.jpg"><br>果然，返回的是一个新建的集合，那么集合里面放了两个参数，那个是我们要找的config配置类全包名参数呢？根据参数的字面意思，可以锁定configurations就是我们要找的参数。<br>那么configurations是怎么得来的呢？看上面的代码，我们可以发现configurations是通过getCandidateConfigurations()方法获取的。<br>getCandidateConfigurations()方法看字面意思是获取候选的configurations和我们上面自己定义的从properties文件读取数据的方法MyPropertyReader.readPropertyForMe()是不是有点像，也是时获取在properties中候选的config配置类的全包名。<br>点进去getCandidateConfigurations()方法：<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/getCandidateConfigurations.jpg"><br>从这个loadFactoryNames方法体来看，好像没有给他传递一个具体路径,但是通过下面的断言：在 META-INFspring.factories 中找不到自动配置类。如果您“+”正在使用自定义包装，请确保该文件是正确的。我们可以判断他的这个配置文件就叫spring.factories，存放的路径是META-INF/spring.factories。<br>打开对应路径的文件：<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/factory.jpg"><br>果然，在这个路径下存在着一个配置文件，让我们点进这个配置文件：<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/configurations.jpg"><br>果然，这里存放着大量的config配置类的全包名，并且key为EnableAutoConfiguration注解的全包名路径，和我们上面写的properties存放的数据格式一样！<br>所以什么是自动装配呢？<br>    手动装配：在spring的xml配置文件中使用bean标签将一个bean注入到另一个bean的property中。<br>    自动装配：加载存储了很多的config配置类的全包名的配置文件，通过config配置文件的全包名获取到对应的config配置文件，并将配置文件中的bean实例化注入到对应的properties文件中的property属性中。</p>
+<p>springBoot自动装配流程图：  </p>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/springBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%B5%81%E7%A8%8B.png"><br>4. getAutoConfigurationEntry方法再探<br>我们看一下这个方法除了getCandidateConfigurations获取候选的config配置类还做了什么：</p>
+<p><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/remove.jpg"><br>getAutoConfigurationEntry方法还将没有在pom.xml使用启动器激活的config配置类移除掉，还把用户在pom.xml文件中exclude排除的config配置类移除掉，这样就不用加载那些没有用到的配置类了，只需要对剩下的有用的配置类进行加载即可<br>5. 结论：<br>    1. SpringBoot在启动的时候从类路径下的META-INF/spring.factories中获取EnableAutoConfiguration指定的值<br>    2. 将这些值作为自动配置类导入容器 ， 自动配置类就生效 ， 帮我们进行自动配置工作；<br>    3. SpringBoot自动装配的本质就是通过Spring去读取META-INF/spring.factories中保存的配置类文件然后加载bean定义的过程。<br>    4. 如果是标了@Configuration注解，就是批量加载了里面的bean定义<br>    5. 如何实现”自动“：通过配置文件获取对应的批量配置类，然后通过配置类批量加载bean定义，只要有写好的配置文件spring.factories就实现了自动。</p>
+<p>以上的自动装配原理探析为转载CC_且听风吟的，原文地址：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43826242/article/details/106005176?utm_source=app&amp;app_version=4.16.0&amp;code=app_1562916241&amp;uLinkId=usr1mkqgl919blen">https://blog.csdn.net/weixin_43826242/article/details/106005176?utm_source=app&amp;app_version=4.16.0&amp;code=app_1562916241&amp;uLinkId=usr1mkqgl919blen</a></p>
+<h5 id="启动类上的SpringApplication-run方法"><a href="#启动类上的SpringApplication-run方法" class="headerlink" title="启动类上的SpringApplication.run方法"></a>启动类上的SpringApplication.run方法</h5><ol>
+<li>SpringApplication<br>这个类主要做了四件事：<br>1、推断应用的类型是普通的项目还是Web项目<br>2、查找并加载所有可用初始化器 ， 设置到initializers属性中<br>3、找出所有的应用程序监听器，设置到listeners属性中<br>4、推断并设置main方法的定义类，找到运行的主类<br>查看如下构造器： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SpringApplication</span><span class="params">(ResourceLoader resourceLoader, Class&lt;?&gt;... primarySources)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.resourceLoader = resourceLoader;</span><br><span class="line">		Assert.notNull(primarySources, <span class="string">&quot;PrimarySources must not be null&quot;</span>);</span><br><span class="line">		<span class="keyword">this</span>.primarySources = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));</span><br><span class="line">		<span class="keyword">this</span>.webApplicationType = WebApplicationType.deduceFromClasspath();</span><br><span class="line">		<span class="keyword">this</span>.bootstrapRegistryInitializers = getBootstrapRegistryInitializersFromSpringFactories();</span><br><span class="line">		setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));</span><br><span class="line">		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));</span><br><span class="line">		<span class="keyword">this</span>.mainApplicationClass = deduceMainApplicationClass();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li>run方法<br><img src="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/main.webp"></li>
+</ol>
+<p>以上启动类上的SpringApplication.run方法转载自狂神说，原文地址：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg==&amp;chksm=ce6107fcf9168eeaa5381228dad0e888ffc03401bc51e4bc7637bd46604b8e6e468cc8b43956&amp;idx=1&amp;mid=2247483743&amp;scene=21&amp;sn=431a5acfb0e5d6898d59c6a4cb6389e7#wechat_redirect">https://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg%3D%3D&amp;chksm=ce6107fcf9168eeaa5381228dad0e888ffc03401bc51e4bc7637bd46604b8e6e468cc8b43956&amp;idx=1&amp;mid=2247483743&amp;scene=21&amp;sn=431a5acfb0e5d6898d59c6a4cb6389e7#wechat_redirect</a></p>
+
+      
+
+      <!-- 增加版权声明 -->
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/05/sping%E5%92%8Cmybatis%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-10-05T07:33:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/05/sping%E5%92%8Cmybatis%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B/">sping和mybatis整合流程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
+        <div class="declare">
+          <strong>本文作者：</strong>
           
+            YanXiao
           
-
+          <br>
+          <strong>本文链接：</strong>
+          <a rel="license" href="http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/">http://1815972815.github.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/</a>
+          <br>
+          <strong>版权声明：</strong>
+          本作品采用
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+          进行许可。转载请注明出处！
+          
+            <br>
+            <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+          
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      <!-- 增加版权声明结束 -->
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/" class="archive-article-date">
-  	<time datetime="2021-10-05T06:42:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/02/springBoot-HelloWorld/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springBoot-HelloWorld</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/">spring中的aop</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pom-xml%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">pom.xml文件的分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#springBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%89%8D%E5%81%9A%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">springBoot自动装配实例化前做的准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#My%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="toc-number">4.</span> <span class="toc-text">My自动装配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#springBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">springBoot自动装配源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E7%9A%84-SpringBootApplication%E6%B3%A8%E8%A7%A3"><span class="toc-number">5.1.</span> <span class="toc-text">启动类上的@SpringBootApplication注解</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E7%9A%84SpringApplication-run%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">启动类上的SpringApplication.run方法</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/05/proxy%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-10-05T04:55:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/05/proxy%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">proxy代理模式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/05/spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2021-10-05T01:22:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/05/spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">spring注解开发</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/05/spring%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" class="archive-article-date">
-  	<time datetime="2021-10-05T01:21:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/05/spring%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">spring自动装配</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/04/spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2021-10-04T14:07:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/04/spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring依赖注入</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/10/04/ioc%E5%8E%9F%E7%90%86%E5%8F%8Aspring%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="archive-article-date">
-  	<time datetime="2021-10-04T12:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/10/04/ioc%E5%8E%9F%E7%90%86%E5%8F%8Aspring%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/">ioc原理及spring快速上手</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  	<time datetime="2021-09-29T06:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/">mybatis缓存</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/27/mybatis%E5%8A%A8%E6%80%81SQL/" class="archive-article-date">
-  	<time datetime="2021-09-27T09:02:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/27/mybatis%E5%8A%A8%E6%80%81SQL/">mybatis动态SQL</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2021-09-27T06:43:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/09/27/mybatis%E7%9A%84%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80/">mybatis的一对多和多对一</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -483,8 +472,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
