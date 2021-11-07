@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://1815972815.github.io">
-  <title>Hexo</title>
+  <title>自动配置原理探析 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://1815972815.github.io/page/2/index.html">
+  <meta name="description" content="摘要为什么在配置文件application.properties或者application.yaml中进行配置就能够生效呢？配置文件中能写什么呢？又该怎么写呢？下面就来解决这些问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动配置原理探析">
+<meta property="og:url" content="http://1815972815.github.io/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="摘要为什么在配置文件application.properties或者application.yaml中进行配置就能够生效呢？配置文件中能写什么呢？又该怎么写呢？下面就来解决这些问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://1815972815.github.io/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD.webp">
+<meta property="article:published_time" content="2021-11-07T00:56:13.000Z">
+<meta property="article:modified_time" content="2021-11-07T07:32:55.422Z">
 <meta property="article:author" content="YanXiao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://1815972815.github.io/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD.webp">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -162,45 +168,115 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-什么是spring-mvc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+<article id="post-自动配置原理探析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/">什么是spring-mvc</a>
+    <h1 class="article-title" itemprop="name">
+      自动配置原理探析
     </h1>
   
 
         <!--显示阅读次数-->
 
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+  
         
-        <a href="/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/" class="archive-article-date">
-  	<time datetime="2021-10-07T12:54:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
+        <a href="/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2021-11-07T00:56:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>作者：言笑</p>
-<h3 id="什么是MVC？"><a href="#什么是MVC？" class="headerlink" title="什么是MVC？"></a>什么是MVC？</h3><ol>
-<li>M：model（模型），提供要展示的数据，包含数据和行为</li>
-<li>V：view（视图），负责进行模型的展示</li>
-<li>C：controller（控制器），接收用户请求给模型处理，然后再将模型处理完的数据返回给视图（调度者）</li></ol>
-        
+        <h5 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h5><p>为什么在配置文件application.properties或者application.yaml中进行配置就能够生效呢？配置文件中能写什么呢？又该怎么写呢？下面就来解决这些问题</p>
+<span id="more"></span>
+<h4 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h4><p>为什么在配置文件中的配置能够生效呢？因为在配置文件中的配置能够实现自动配置。那什么是自动配置？我们一HttpEncodingAutoConfiguration（Http编码自动配置）为例进行探析：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个注解表明这个类是一个配置类，和普通的配置类没有区别，可以给容器中添加组件</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span></span><br><span class="line"><span class="comment">//启动指定类的属性配置功能，进入这个ServerProperties类中查看，会发现 properties文件中就是能够配置的属性，这些属性就是在配置文件中能够配置的东西，并且是通过prefix = &quot;server&quot;中的前缀server进行配置的</span></span><br><span class="line"><span class="comment">//并且这个配置类绑定了这个Properties文件，并把properties文件放到了ioc容器中 </span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(ServerProperties.class)</span></span><br><span class="line"><span class="comment">//根据不同的判断条件，判断这个类是否生效</span></span><br><span class="line"><span class="comment">//此处为判断当前应用是否为web应用，如果是，那么这个类生效</span></span><br><span class="line"><span class="meta">@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)</span></span><br><span class="line"><span class="comment">//判断当前应用是否有解决springMVC乱码问题过滤器CharacterEncodingFilter这个类，如果有这个类就生效</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(CharacterEncodingFilter.class)</span></span><br><span class="line"><span class="comment">//判断配置文件中是否存在某个配置：erver.servlet.encoding；</span></span><br><span class="line">  <span class="comment">//如果不存在，判断也是成立的</span></span><br><span class="line">  <span class="comment">//即使我们配置文件中不配置pring.http.encoding.enabled=true，也是默认生效的；</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(prefix = &quot;server.servlet.encoding&quot;, value = &quot;enabled&quot;, matchIfMissing = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpEncodingAutoConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="comment">//定义properties属性，此处绑定的properties文件已经和springBoot的配置文件进行映射了</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Encoding properties;</span><br><span class="line">    <span class="comment">//只有一个构造方法的情况下，默认参数会从容器中拿</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HttpEncodingAutoConfiguration</span><span class="params">(ServerProperties properties)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.properties = properties.getServlet().getEncoding();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//给容器添加组件，组件中的某些值会中properties中获取</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">    <span class="comment">//判断容器中有没有这个组件，如果没有才会往容器中添加这个组件</span></span><br><span class="line">	<span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> CharacterEncodingFilter <span class="title">characterEncodingFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		CharacterEncodingFilter filter = <span class="keyword">new</span> OrderedCharacterEncodingFilter();</span><br><span class="line">		filter.setEncoding(<span class="keyword">this</span>.properties.getCharset().name());</span><br><span class="line">		filter.setForceRequestEncoding(<span class="keyword">this</span>.properties.shouldForce(Encoding.Type.REQUEST));</span><br><span class="line">		filter.setForceResponseEncoding(<span class="keyword">this</span>.properties.shouldForce(Encoding.Type.RESPONSE));</span><br><span class="line">		<span class="keyword">return</span> filter;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进入ServerProperties.class中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义从配置文件中获取指定属性的前缀，并和对应的配置类进行绑定(此处指的是上面的配置类)</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;server&quot;, ignoreUnknownFields = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Server HTTP port.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">     <span class="comment">//可以配置的属性</span></span><br><span class="line">	<span class="keyword">private</span> Integer port;</span><br><span class="line">    <span class="comment">//.....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：  </p>
+<ol>
+<li>为什么能够进行自动配置呢？<br>根据当前不同的条件进行判断，当条件满足时，配置类生效，并绑定对应的properties默认配置文件，如果没有在springBoot配置文件中对这些属性进行配置，那么就会使用默认的配置文件中的值，如果进行了配置，因为配置类映射到了springBoot的配置文件，就会识别到我们手动的配置，并将我们手动配置的属性的值替换掉默认配置的属性的值。</li>
+<li>那在springBoot配置文件中能配置什么呢？<br>在配置文件中能配置的属性都在xxxProperties文件中，如上面可以配置的东西就在ServerProperties.class中。那怎么找到对应的xxxProperties呢？首先要知道你配置的东西是在哪个包下的，然后到spring.factories中搜索到对应的全包名，然后点进去查看对应的配置类，在配置类上的注解中找到注解@EnableConfigurationProperties(xxxProperties.class)，点进去注解中的这个xxxProperties.class就能查看你可以在springBoot配置文件中能配置的东西了</li>
+<li>在springBoot配置文件中进行配置该怎么写呢？<br>进入到了xxxAutoConfigurartion类中，类上有注解@ConditionalOnProperty(prefix = “server.servlet.encoding”, value = “enabled”, matchIfMissing = true)，根据注解上的前缀prefix = “xxx”就可以知道在springBoot配置文件中的前缀怎么写，然后在配置文件中把前缀写出来，再往后点就会出现对应的可以配置的属性了，然后根据需要进行配置就可以了</li>
+</ol>
+<p>自动配置的精髓：</p>
+<ol>
+<li>springBoot在启动是会加载很多自动配置类，即xxxAutoConfigurartion</li>
+<li>我们再看我们需要的功能有没有在springBoot写好的配置文件中，如果有，再看我们要用到的组件有没有被springBoot配置类注册到容器中，如果有，那么就不用我们手动配置了，springBoot会自动帮我们进行配置，当然，如果想修改配置也是可以的。前提是这个配置类xxxAutoConfigurartion要被激活了，一般激活就是在pom.xml文件找那个配置对应的启动器就行了</li>
+<li>springBoot自动配置类再祖册组件时会从对应的xxxProperties中获取一些属性，并且会赋予默认值，如果想要对这些属性的值进行更改，可以在springBoot配置文件中进行更改<br>注：<br>xxxAutoConfigurartion：自动配置类，给容器中添加组件<br>xxxProperties：封装配置文件中的相关属性</li>
+</ol>
+<h4 id="自动配置类的条件判断-Conditional"><a href="#自动配置类的条件判断-Conditional" class="headerlink" title="自动配置类的条件判断@Conditional"></a>自动配置类的条件判断@Conditional</h4><p>作用：必须是@Conditional指定的条件成立，才给容器中添加组件，配置配里面的所有内容才生效；<br>@Conditional有很多派生的注解：<br><img src="/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD.webp"><br>springBoot启动加载了很多自动配置类，但不是每配置类都会生效的，只有满足了条件判断注解的配置类才会生效，而那些没有满足条件的配置类都会被排除掉，最终加载的自动配置类只有那些满足条件的</p>
+<p>转载自狂神说，原文地址：<br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg==&amp;chksm=ce6107d5f9168ec34f59d88c5a7cfa592ab2c1a5bf02cc3ed7bbb7b4f4e93d457144a6843a23&amp;idx=1&amp;mid=2247483766&amp;scene=21&amp;sn=27739c5103547320c505d28bec0a9517#wechat_redirect">https://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg%3D%3D&amp;chksm=ce6107d5f9168ec34f59d88c5a7cfa592ab2c1a5bf02cc3ed7bbb7b4f4e93d457144a6843a23&amp;idx=1&amp;mid=2247483766&amp;scene=21&amp;sn=27739c5103547320c505d28bec0a9517#wechat_redirect</a></p>
+
       
 
       <!-- 增加版权声明 -->
       
       
-        <div class="declare" hidden="hidden"></div>
+        <div class="declare">
+          <strong>本文作者：</strong>
+          
+            YanXiao
+          
+          <br>
+          <strong>本文链接：</strong>
+          <a rel="license" href="http://1815972815.github.io/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/">http://1815972815.github.io/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/</a>
+          <br>
+          <strong>版权声明：</strong>
+          本作品采用
+          <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+          进行许可。转载请注明出处！
+          
+            <br>
+            <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+          
+        </div>
       
 
       <!-- 增加版权声明结束 -->
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -209,16 +285,85 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/07/%E4%BB%80%E4%B9%88%E6%98%AFspring-mvc/">展开全文 >></a>
-        </p>
+
       
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://1815972815.github.io/thub.io/2021/11/07/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86%E6%8E%A2%E6%9E%90/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89starter/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          自定义starter
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/04/spingBoot%E5%8E%9F%E7%90%86%E5%88%9D%E6%8E%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">spingBoot原理初探</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -233,688 +378,34 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/05/spring%E4%BA%8B%E5%8A%A1/">spring事务</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/05/spring%E4%BA%8B%E5%8A%A1/" class="archive-article-date">
-  	<time datetime="2021-10-05T08:37:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作者：言笑</p>
-<h3 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h3><p>事务就是将一系列的操作看成一个单元的操作，要么失败，要么成功</p>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/05/spring%E4%BA%8B%E5%8A%A1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86"><span class="toc-number"></span> <span class="toc-text">自动配置原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B1%BB%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD-Conditional"><span class="toc-number"></span> <span class="toc-text">自动配置类的条件判断@Conditional</span></a>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-sping和mybatis整合流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/05/sping%E5%92%8Cmybatis%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B/">sping和mybatis整合流程</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/05/sping%E5%92%8Cmybatis%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2021-10-05T07:33:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作者：言笑</p>
-<h3 id="1、在模块的pom-xml中导入相关依赖和解决静态资源导出问题"><a href="#1、在模块的pom-xml中导入相关依赖和解决静态资源导出问题" class="headerlink" title="1、在模块的pom.xml中导入相关依赖和解决静态资源导出问题"></a>1、在模块的pom.xml中导入相关依赖和解决静态资源导出问题</h3>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/05/sping%E5%92%8Cmybatis%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring中的aop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/">spring中的aop</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/" class="archive-article-date">
-  	<time datetime="2021-10-05T06:42:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作者：言笑</p>
-<h3 id="什么是aop？"><a href="#什么是aop？" class="headerlink" title="什么是aop？"></a>什么是aop？</h3><p>aop就是面向切面编程，通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术。<br>简单来说就是不改变源代码对程序进行增强和维护的编程。</p>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/05/spring%E4%B8%AD%E7%9A%84aop/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-proxy代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/05/proxy%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">proxy代理模式</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/05/proxy%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-10-05T04:55:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作者：言笑</p>
-<h3 id="什么是代理模式？"><a href="#什么是代理模式？" class="headerlink" title="什么是代理模式？"></a>什么是代理模式？</h3><p>代理模式就是给某一个对象提供一个代理对象，并由代理对象控制对原对象的引用。——八英里</p>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/05/proxy%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring注解开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/05/spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">spring注解开发</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/05/spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2021-10-05T01:22:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作者：言笑</p>
-<h3 id="spring针对bean管理中为创建对象提供了注解"><a href="#spring针对bean管理中为创建对象提供了注解" class="headerlink" title="spring针对bean管理中为创建对象提供了注解"></a>spring针对bean管理中为创建对象提供了注解</h3><ol>
-<li>@Conponent：普通的创建对象</li>
-<li>@Service：建议使用在service层创建对象</li>
-<li>@Controller：建议使用在controller层创建对象</li>
-<li>@Repository：建议使用在mapper（dao）层创建对象</li></ol>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/05/spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring自动装配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/05/spring%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">spring自动装配</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/05/spring%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/" class="archive-article-date">
-  	<time datetime="2021-10-05T01:21:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>作者：言笑</p>
-<h3 id="什么是spring自动装配？"><a href="#什么是spring自动装配？" class="headerlink" title="什么是spring自动装配？"></a>什么是spring自动装配？</h3><p>spring自动装配就是spring在容器中为某个bean寻找其依赖的bean，并将其进行注入。自动装配分为两个过程：</p>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/05/spring%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-spring依赖注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/04/spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">spring依赖注入</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/04/spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2021-10-04T14:07:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="作者：言笑"><a href="#作者：言笑" class="headerlink" title="作者：言笑"></a>作者：言笑</h4><h3 id="一、什么是依赖注入？"><a href="#一、什么是依赖注入？" class="headerlink" title="一、什么是依赖注入？"></a>一、什么是依赖注入？</h3><p>创建被调用者实例的工作由Spring容器来完成，并且bean对象由spring容器来完成设置和装配</p>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/04/spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ioc原理及spring快速上手" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/04/ioc%E5%8E%9F%E7%90%86%E5%8F%8Aspring%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/">ioc原理及spring快速上手</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/10/04/ioc%E5%8E%9F%E7%90%86%E5%8F%8Aspring%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/" class="archive-article-date">
-  	<time datetime="2021-10-04T12:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="作者：言笑"><a href="#作者：言笑" class="headerlink" title="作者：言笑"></a>作者：言笑</h4><h3 id="一、什么是spring？"><a href="#一、什么是spring？" class="headerlink" title="一、什么是spring？"></a>一、什么是spring？</h3><p>spring是一个轻量级的控制反转（ioc）和面向切面（aop）的框架（容器）。</p>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/04/ioc%E5%8E%9F%E7%90%86%E5%8F%8Aspring%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mybatis缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/">mybatis缓存</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-        
-        <a href="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  	<time datetime="2021-09-29T06:47:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="mybatis缓存的实现与原理"><a href="#mybatis缓存的实现与原理" class="headerlink" title="mybatis缓存的实现与原理"></a>mybatis缓存的实现与原理</h2><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ol>
-<li>什么是缓存？<br>存在内存中的临时数据就是缓存（cache）</li>
-<li>为什么使用缓存？<br>减少和数据库交互的次数，减少系统的开销，提高系统的效率</li>
-<li>什么数据适合使用缓存？<br>经常被访问的并且不经常改变的数据适合使用缓存</li></ol>
-        
-      
-
-      <!-- 增加版权声明 -->
-      
-      
-        <div class="declare" hidden="hidden"></div>
-      
-
-      <!-- 增加版权声明结束 -->
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/29/mybatis%E7%BC%93%E5%AD%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
-    </nav>
   
+
+  
+
+  
+
+  
+
 
 
           </div>
@@ -946,8 +437,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
