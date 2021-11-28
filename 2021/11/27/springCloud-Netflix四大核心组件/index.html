@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://1815972815.github.io">
   <title>springCloud-Netflix四大核心组件 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="摘要本文简单介绍了springCloud-Netflix的四大核心组件，其中包括Eureka，Ribbon，Hystrix和Zuul，并对这是个组建的使用进行了简单的描述，本文内容较多，要耐心才能看完哦!">
+  <meta name="description" content="摘要本文简单介绍了springCloud-Netflix的四大核心组件，其中包括Eureka，Ribbon，Hystrix和Zuul，并对这四个组建的使用进行了简单的描述，本文内容较多，要耐心才能看完哦!">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springCloud-Netflix四大核心组件">
 <meta property="og:url" content="http://1815972815.github.io/2021/11/27/springCloud-Netflix%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="摘要本文简单介绍了springCloud-Netflix的四大核心组件，其中包括Eureka，Ribbon，Hystrix和Zuul，并对这是个组建的使用进行了简单的描述，本文内容较多，要耐心才能看完哦!">
+<meta property="og:description" content="摘要本文简单介绍了springCloud-Netflix的四大核心组件，其中包括Eureka，Ribbon，Hystrix和Zuul，并对这四个组建的使用进行了简单的描述，本文内容较多，要耐心才能看完哦!">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://1815972815.github.io/2021/11/27/springCloud-Netflix%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/eureka%E5%8E%9F%E7%90%86.jpg">
 <meta property="og:image" content="http://1815972815.github.io/2021/11/27/springCloud-Netflix%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/eureka%E7%90%86%E8%A7%A3.jpg">
@@ -56,7 +56,7 @@
 <meta property="og:image" content="http://1815972815.github.io/2021/11/27/springCloud-Netflix%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/%E7%BD%91%E5%85%B3%E6%80%9D%E8%B7%AF.jpg">
 <meta property="og:image" content="http://1815972815.github.io/2021/11/27/springCloud-Netflix%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/%E7%BD%91%E5%85%B3%E7%9B%AE%E5%BD%95.jpg">
 <meta property="article:published_time" content="2021-11-27T06:43:37.000Z">
-<meta property="article:modified_time" content="2021-11-28T15:55:48.996Z">
+<meta property="article:modified_time" content="2021-11-28T15:58:20.101Z">
 <meta property="article:author" content="YanXiao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://1815972815.github.io/2021/11/27/springCloud-Netflix%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6/eureka%E5%8E%9F%E7%90%86.jpg">
@@ -237,7 +237,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>本文简单介绍了springCloud-Netflix的四大核心组件，其中包括Eureka，Ribbon，Hystrix和Zuul，并对这是个组建的使用进行了简单的描述，本文内容较多，要耐心才能看完哦!</p>
+        <h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>本文简单介绍了springCloud-Netflix的四大核心组件，其中包括Eureka，Ribbon，Hystrix和Zuul，并对这四个组建的使用进行了简单的描述，本文内容较多，要耐心才能看完哦!</p>
 <span id="more"></span>
 <h3 id="服务注册与发现——Eureka"><a href="#服务注册与发现——Eureka" class="headerlink" title="服务注册与发现——Eureka"></a>服务注册与发现——Eureka</h3><h4 id="什么是Eureka服务注册中心"><a href="#什么是Eureka服务注册中心" class="headerlink" title="什么是Eureka服务注册中心"></a>什么是Eureka服务注册中心</h4><ul>
 <li>Eureka是Netflix的一个子模块，也是核心模块之一。Eureka是基于REST的服务，用于定位服务，以实现云端中间件层服务发现和故障转移，服务注册与发现对于微服务来说是非常重要的，有了服务注册与发现，只需要使用服务的标识符，就可以访问到服务，而不需要修改服务调用的配置文件了</li>
